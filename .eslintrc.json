@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "standard",
+    "prettier"
+  ],
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 120
+      }
+    ],
+    "yoda": 0,
+    "no-unused-vars": 1
+  },
+  "globals": {
+    "$": false
+  }
+}
