@@ -1,10 +1,10 @@
 function addWord(state, action) {
-  const { wordId, text } = action;
+  const { wordId, wordText } = action;
   return {
     ...state,
     [wordId]: {
       id: wordId,
-      text
+      text: wordText
     }
   };
 }
