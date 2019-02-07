@@ -27,6 +27,15 @@ class App extends Component {
     this.setState({ wordText: target.value });
   }
 
+  parseWordList() {
+    const { wordIds, words } = this.props;
+    const wordList = wordIds.map(wordId => {
+      const word = words[wordId];
+      return <li key={word.id}>{word.text}</li>;
+    });
+    return wordList;
+  }
+
   render() {
     const { wordText } = this.state;
     return (
@@ -35,12 +44,17 @@ class App extends Component {
           <input type="text" value={wordText} onChange={this.handleChangeInput} />
           <input type="submit" />
         </form>
-        <ul>
-          <li>aaa</li>
-        </ul>
+        <ul>{this.parseWordList()}</ul>
       </>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    wordIds: state.wordIds,
+    words: state.words
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -50,6 +64,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
