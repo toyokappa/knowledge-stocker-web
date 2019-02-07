@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
-import wordList from "./wordList";
+import wordIds from "./wordIds";
+import words from "./words";
 
-export default combineReducers({ wordList });
+export default combineReducers({ wordIds, words });
