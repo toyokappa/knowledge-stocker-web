@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { addWord } from "../../actions";
@@ -33,7 +34,11 @@ class WordList extends Component {
     const { wordIds, words } = this.props;
     const wordList = wordIds.map(wordId => {
       const word = words[wordId];
-      return <li key={word.id}>{word.text}</li>;
+      return (
+        <li key={word.id}>
+          <Link to={`/words/${word.id}`}>{word.text}</Link>
+        </li>
+      );
     });
     return wordList;
   }
