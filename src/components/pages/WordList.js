@@ -16,8 +16,10 @@ class WordList extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { addWord } = this.props;
     const { wordText } = this.state;
+    if (wordText === "") return;
+
+    const { addWord } = this.props;
     addWord(wordText);
     this.setState({ wordText: "" });
   }
