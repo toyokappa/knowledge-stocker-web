@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { addWord } from "./actions";
+import { addWord } from "../../actions";
 
-class App extends Component {
+class WordList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(WordList);
