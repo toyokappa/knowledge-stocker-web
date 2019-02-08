@@ -1,3 +1,10 @@
+const initialState = {
+  0: {
+    id: 0,
+    text: "initial state"
+  }
+};
+
 function addWord(state, action) {
   const { wordId, wordText } = action;
   return {
@@ -9,7 +16,7 @@ function addWord(state, action) {
   };
 }
 
-export default function words(state = {}, action) {
+export default function words(state = initialState, action) {
   switch (action.type) {
     case "ADD_WORD":
       return addWord(state, action);
