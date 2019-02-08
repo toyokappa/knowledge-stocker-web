@@ -3,6 +3,7 @@ function addKnowledge(state, action) {
   return {
     ...state,
     [knowledgeId]: {
+      id: knowledgeId,
       wordId,
       url: knowledgeUrl,
       understanding: knowledgeUnderstanding

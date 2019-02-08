@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { addKnowledge } from "../../actions";
@@ -32,6 +33,24 @@ class Word extends Component {
     this.setState({ [name]: value });
   }
 
+  parseKnowledgeList() {
+    const { knowledges, words } = this.props;
+    const word = words[this.wordId];
+    const knowledgeList = word.knowledges.map(knowledgeId => {
+      const knowledge = knowledges[knowledgeId];
+      console.log(knowledge.id);
+      return (
+        <li key={knowledge.id}>
+          <a href={knowledge.url} target="_blank" rel="noopener noreferrer">
+            {knowledge.url}
+          </a>
+          <span> 理解度: {knowledge.understanding}</span>
+        </li>
+      );
+    });
+    return knowledgeList;
+  }
+
   render() {
     const { knowledgeUrl, knowledgeUnderstanding } = this.state;
     const { words } = this.props;
@@ -50,6 +69,8 @@ class Word extends Component {
           />
           <input type="submit" />
         </form>
+        <ul>{this.parseKnowledgeList()}</ul>
+        <Link to="/">一覧に戻る</Link>
       </>
     );
   }
@@ -57,7 +78,8 @@ class Word extends Component {
 
 function mapStateToProps(state) {
   return {
-    words: state.words
+    words: state.words,
+    knowledges: state.knowledges
   };
 }
 
