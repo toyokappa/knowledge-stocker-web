@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { addWord } from "../../actions";
+import { addWord, removeWord } from "../../actions";
 
 class WordList extends Component {
   constructor(props) {
@@ -31,12 +31,13 @@ class WordList extends Component {
   }
 
   parseWordList() {
-    const { wordIds, words } = this.props;
+    const { wordIds, words, removeWord } = this.props;
     const wordList = wordIds.map(wordId => {
       const word = words[wordId];
       return (
         <li key={word.id}>
           <Link to={`/words/${word.id}`}>{word.text}</Link>
+          <span onClick={() => removeWord(word.id, word.knowledges)}> x</span>
         </li>
       );
     });
@@ -66,7 +67,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addWord: wordText => dispatch(addWord(wordText))
+    addWord: wordText => dispatch(addWord(wordText)),
+    removeWord: (wordId, knowledgeIds) => dispatch(removeWord(wordId, knowledgeIds))
   };
 }
 

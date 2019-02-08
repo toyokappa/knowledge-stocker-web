@@ -18,6 +18,12 @@ function addWord(state, action) {
   };
 }
 
+function removeWord(state, action) {
+  const { wordId } = action;
+  const { [wordId]: someValue, ...newState } = state;
+  return newState;
+}
+
 function addKnowledge(state, action) {
   const { knowledgeId, wordId } = action;
   const word = state[wordId];
@@ -34,6 +40,8 @@ export default function words(state = initialState, action) {
   switch (action.type) {
     case "ADD_WORD":
       return addWord(state, action);
+    case "REMOVE_WORD":
+      return removeWord(state, action);
     case "ADD_KNOWLEDGE":
       return addKnowledge(state, action);
     default:
