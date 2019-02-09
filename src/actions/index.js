@@ -18,3 +18,7 @@ export function addKnowledge(wordId, knowledgeUrl, knowledgeUnderstanding) {
     knowledgeUnderstanding
   };
 }
+
+export function removeKnowledge(wordId, knowledgeId) {
+  return { type: "REMOVE_KNOWLEDGE", wordId, knowledgeId };
+}

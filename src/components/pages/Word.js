@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { addKnowledge } from "../../actions";
+import { addKnowledge, removeKnowledge } from "../../actions";
 
 class Word extends Component {
   constructor(props) {
@@ -34,17 +34,17 @@ class Word extends Component {
   }
 
   parseKnowledgeList() {
-    const { knowledges, words } = this.props;
+    const { knowledges, words, removeKnowledge } = this.props;
     const word = words[this.wordId];
     const knowledgeList = word.knowledges.map(knowledgeId => {
       const knowledge = knowledges[knowledgeId];
-      console.log(knowledge.id);
       return (
         <li key={knowledge.id}>
           <a href={knowledge.url} target="_blank" rel="noopener noreferrer">
             {knowledge.url}
           </a>
           <span> 理解度: {knowledge.understanding}</span>
+          <span onClick={() => removeKnowledge(this.wordId, knowledge.id)}> x</span>
         </li>
       );
     });
@@ -86,7 +86,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addKnowldge: (wordId, knowledgeUrl, knowledgeUnderstanding) =>
-      dispatch(addKnowledge(wordId, knowledgeUrl, knowledgeUnderstanding))
+      dispatch(addKnowledge(wordId, knowledgeUrl, knowledgeUnderstanding)),
+    removeKnowledge: (wordId, knowledgeId) => dispatch(removeKnowledge(wordId, knowledgeId))
   };
 }
 

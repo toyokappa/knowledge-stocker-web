@@ -36,6 +36,18 @@ function addKnowledge(state, action) {
   };
 }
 
+function removeKnowledge(state, action) {
+  const { wordId, knowledgeId } = action;
+  const word = state[wordId];
+  return {
+    ...state,
+    [wordId]: {
+      ...word,
+      knowledges: word.knowledges.filter(id => id !== knowledgeId)
+    }
+  };
+}
+
 export default function words(state = initialState, action) {
   switch (action.type) {
     case "ADD_WORD":
@@ -44,6 +56,8 @@ export default function words(state = initialState, action) {
       return removeWord(state, action);
     case "ADD_KNOWLEDGE":
       return addKnowledge(state, action);
+    case "REMOVE_KNOWLEDGE":
+      return removeKnowledge(state, action);
     default:
       return state;
   }

@@ -20,12 +20,20 @@ function addKnowledge(state, action) {
   };
 }
 
+function removeKnowledge(state, action) {
+  const { knowledgeId } = action;
+  const { [knowledgeId]: someValue, ...newState } = state;
+  return newState;
+}
+
 export default function knowledges(state = {}, action) {
   switch (action.type) {
     case "REMOVE_WORD":
       return removeWord(state, action);
     case "ADD_KNOWLEDGE":
       return addKnowledge(state, action);
+    case "REMOVE_KNOWLEDGE":
+      return removeKnowledge(state, action);
     default:
       return state;
   }
