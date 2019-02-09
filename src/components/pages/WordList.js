@@ -1,78 +1,13 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React from "react";
 
-import { addWord, removeWord } from "../../actions";
+import Form from "../organisms/WordList/Form";
+import List from "../organisms/WordList/List";
 
-class WordList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      wordText: ""
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeInput = this.handleChangeInput.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { wordText } = this.state;
-    if (wordText === "") return;
-
-    const { addWord } = this.props;
-    addWord(wordText);
-    this.setState({ wordText: "" });
-  }
-
-  handleChangeInput(event) {
-    const { target } = event;
-    this.setState({ wordText: target.value });
-  }
-
-  parseWordList() {
-    const { wordIds, words, removeWord } = this.props;
-    const wordList = wordIds.map(wordId => {
-      const word = words[wordId];
-      return (
-        <li key={word.id}>
-          <Link to={`/words/${word.id}`}>{word.text}</Link>
-          <span onClick={() => removeWord(word.id, word.knowledges)}> x</span>
-        </li>
-      );
-    });
-    return wordList;
-  }
-
-  render() {
-    const { wordText } = this.state;
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={wordText} onChange={this.handleChangeInput} />
-          <input type="submit" />
-        </form>
-        <ul>{this.parseWordList()}</ul>
-      </>
-    );
-  }
+export default function WordList() {
+  return (
+    <>
+      <Form />
+      <List />
+    </>
+  );
 }
-
-function mapStateToProps(state) {
-  return {
-    wordIds: state.wordIds,
-    words: state.words
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addWord: wordText => dispatch(addWord(wordText)),
-    removeWord: (wordId, knowledgeIds) => dispatch(removeWord(wordId, knowledgeIds))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WordList);
