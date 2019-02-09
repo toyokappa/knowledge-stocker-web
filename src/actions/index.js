@@ -5,6 +5,10 @@ export function addWord(wordText) {
   return { type: "ADD_WORD", wordId: wordNextId++, wordText };
 }
 
+export function updateWord(wordId, wordText) {
+  return { type: "UPDATE_WORD", wordId, wordText };
+}
+
 export function removeWord(wordId, knowledgeIds) {
   return { type: "REMOVE_WORD", wordId, knowledgeIds };
 }
