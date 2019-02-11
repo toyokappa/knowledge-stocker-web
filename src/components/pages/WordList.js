@@ -1,13 +1,13 @@
 import React from "react";
 
 import Form from "../organisms/WordList/Form";
-import List from "../organisms/WordList/List";
+import Words from "../organisms/WordList/Words";
 
 export default function WordList() {
   return (
     <>
       <Form />
-      <List />
+      <Words />
     </>
   );
 }

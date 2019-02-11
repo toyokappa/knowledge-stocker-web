@@ -7,6 +7,7 @@ import { routerMiddleware } from "connected-react-router";
 
 import Router from "./Router";
 import rootReducer from "./reducers";
+import { BaseStyles } from "./constants/styles";
 import * as serviceWorker from "./serviceWorker";
 
 const history = createBrowserHistory();
@@ -15,9 +16,12 @@ const middlewares = [routerMiddleware(history)];
 const store = createStore(rootReducer(history), applyMiddleware(...middlewares));
 
 render(
-  <Provider store={store}>
-    <Router history={history} />
-  </Provider>,
+  <>
+    <BaseStyles />
+    <Provider store={store}>
+      <Router history={history} />
+    </Provider>
+  </>,
   document.getElementById("root")
 );
 

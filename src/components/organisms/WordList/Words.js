@@ -1,22 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { ListItem, RemoveButton } from "../../atoms/Common";
 import { removeWord } from "../../../actions";
 
-function List(props) {
+function Words(props) {
   const { wordIds, words, removeWord } = props;
   const wordList = wordIds.map(wordId => {
     const word = words[wordId];
     return (
-      <li key={word.id}>
-        <Link to={`/words/${word.id}`}>{word.text}</Link>
-        <span onClick={() => removeWord(word.id, word.knowledges)}> x</span>
-      </li>
+      <ListItem key={word.id}>
+        <WordLink to={`/words/${word.id}`}>{word.text}</WordLink>
+        <RemoveButton onClick={() => removeWord(word.id, word.knowledges)} />
+      </ListItem>
     );
   });
-  return <ul>{wordList}</ul>;
+  return <WordList>{wordList.reverse()}</WordList>;
 }
+
+const WordLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  margin-right: 0.5rem;
+`;
+
+const WordList = styled.ul`
+  padding: 0;
+`;
 
 function mapStateToProps(state) {
   return {
@@ -34,4 +46,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
+)(Words);

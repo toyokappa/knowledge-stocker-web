@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { Submit, TextField } from "../../atoms/Common";
 import { addWord } from "../../../actions";
 
 class Form extends Component {
@@ -33,12 +35,16 @@ class Form extends Component {
     const { wordText } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={wordText} onChange={this.handleChangeInput} />
-        <input type="submit" />
+        <WordTextField value={wordText} onChange={this.handleChangeInput} />
+        <Submit />
       </form>
     );
   }
 }
+
+const WordTextField = styled(TextField)`
+  border-right: none;
+`;
 
 function mapDispatchToProps(dispatch) {
   return {
