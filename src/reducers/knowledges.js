@@ -20,6 +20,19 @@ function addKnowledge(state, action) {
   };
 }
 
+function updateKnowledge(state, action) {
+  const { knowledgeId, url, understanding } = action;
+  const knowledge = state[knowledgeId];
+  return {
+    ...state,
+    [knowledgeId]: {
+      ...knowledge,
+      url,
+      understanding
+    }
+  };
+}
+
 function removeKnowledge(state, action) {
   const { knowledgeId } = action;
   const { [knowledgeId]: someValue, ...newState } = state;
@@ -32,6 +45,8 @@ export default function knowledges(state = {}, action) {
       return removeWord(state, action);
     case "ADD_KNOWLEDGE":
       return addKnowledge(state, action);
+    case "UPDATE_KNOWLEDGE":
+      return updateKnowledge(state, action);
     case "REMOVE_KNOWLEDGE":
       return removeKnowledge(state, action);
     default:
