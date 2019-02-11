@@ -9,19 +9,19 @@ class Form extends Component {
     this.handleChangeInput = this.handleChangeInput.bind(this);
 
     this.state = {
-      knowledgeUrl: "",
-      knowledgeUnderstanding: ""
+      url: "",
+      understanding: ""
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { knowledgeUrl, knowledgeUnderstanding } = this.state;
-    if (knowledgeUrl === "" || knowledgeUnderstanding === null) return;
+    const { url, understanding } = this.state;
+    if (url === "" || understanding === "") return;
 
     const { wordId, addKnowldge } = this.props;
-    addKnowldge(wordId, knowledgeUrl, knowledgeUnderstanding);
-    this.setState({ knowledgeUrl: "", knowledgeUnderstanding: "" });
+    addKnowldge(wordId, url, understanding);
+    this.setState({ url: "", understanding: "" });
   }
 
   handleChangeInput(event) {
@@ -31,17 +31,12 @@ class Form extends Component {
   }
 
   render() {
-    const { knowledgeUrl, knowledgeUnderstanding } = this.state;
+    const { url, understanding } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" name="knowledgeUrl" value={knowledgeUrl} onChange={this.handleChangeInput} />
-        <input
-          type="number"
-          name="knowledgeUnderstanding"
-          value={knowledgeUnderstanding}
-          onChange={this.handleChangeInput}
-        />
+        <input type="text" name="url" value={url} onChange={this.handleChangeInput} />
+        <input type="number" name="understanding" value={understanding} onChange={this.handleChangeInput} />
         <input type="submit" />
       </form>
     );
@@ -57,8 +52,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addKnowldge: (wordId, knowledgeUrl, knowledgeUnderstanding) =>
-      dispatch(addKnowledge(wordId, knowledgeUrl, knowledgeUnderstanding))
+    addKnowldge: (wordId, url, understanding) => dispatch(addKnowledge(wordId, url, understanding))
   };
 }
 

@@ -8,14 +8,14 @@ function removeWord(state, action) {
 }
 
 function addKnowledge(state, action) {
-  const { knowledgeId, wordId, knowledgeUrl, knowledgeUnderstanding } = action;
+  const { knowledgeId, wordId, url, understanding } = action;
   return {
     ...state,
     [knowledgeId]: {
       id: knowledgeId,
       wordId,
-      url: knowledgeUrl,
-      understanding: knowledgeUnderstanding
+      url,
+      understanding
     }
   };
 }

@@ -13,13 +13,13 @@ export function removeWord(wordId, knowledgeIds) {
   return { type: "REMOVE_WORD", wordId, knowledgeIds };
 }
 
-export function addKnowledge(wordId, knowledgeUrl, knowledgeUnderstanding) {
+export function addKnowledge(wordId, url, understanding) {
   return {
     type: "ADD_KNOWLEDGE",
     knowledgeId: knowledgeNextId++,
     wordId,
-    knowledgeUrl,
-    knowledgeUnderstanding
+    url,
+    understanding
   };
 }
 
