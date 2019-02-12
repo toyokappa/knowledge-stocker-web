@@ -7,6 +7,7 @@ function addWord(state, action) {
     [wordId]: {
       id: wordId,
       text: wordText,
+      understood: false,
       knowledges: []
     }
   };
@@ -37,6 +38,7 @@ function addKnowledge(state, action) {
     ...state,
     [wordId]: {
       ...word,
+      understood: true,
       knowledges: word.knowledges.concat(knowledgeId)
     }
   };
@@ -45,11 +47,14 @@ function addKnowledge(state, action) {
 function removeKnowledge(state, action) {
   const { wordId, knowledgeId } = action;
   const word = state[wordId];
+  const knowledges = word.knowledges.filter(id => id !== knowledgeId);
+  const understood = knowledges.length > 0;
   return {
     ...state,
     [wordId]: {
       ...word,
-      knowledges: word.knowledges.filter(id => id !== knowledgeId)
+      understood,
+      knowledges
     }
   };
 }

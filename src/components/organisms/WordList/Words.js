@@ -30,9 +30,22 @@ const WordList = styled.ul`
   padding: 0;
 `;
 
+function filterWordIds(wordIds, words, filter) {
+  switch (filter) {
+    case "unknown":
+      return wordIds.filter(wordId => !words[wordId].understood);
+    case "welknown":
+      return wordIds.filter(wordId => words[wordId].understood);
+    case "all":
+      return wordIds;
+    default:
+      throw new Error("Unknown filter: " + filter);
+  }
+}
+
 function mapStateToProps(state) {
   return {
-    wordIds: state.wordIds,
+    wordIds: filterWordIds(state.wordIds, state.words, state.filter),
     words: state.words
   };
 }

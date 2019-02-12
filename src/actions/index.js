@@ -35,3 +35,7 @@ export function updateKnowledge(knowledgeId, url, understanding) {
 export function removeKnowledge(wordId, knowledgeId) {
   return { type: "REMOVE_KNOWLEDGE", wordId, knowledgeId };
 }
+
+export function setFilter(filter) {
+  return { type: "SET_FILTER", filter };
+}
