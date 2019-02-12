@@ -1,29 +1,29 @@
 import React, { Component } from "react";
+import Rating from "react-rating";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { NumberField, Submit, UrlField } from "../../atoms/Common";
+import { Submit, UrlField } from "../../atoms/Common";
 import { addKnowledge } from "../../../actions";
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.handleChangeInput = this.handleChangeInput.bind(this);
 
     this.state = {
       url: "",
-      understanding: ""
+      understanding: null
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { url, understanding } = this.state;
-    if (url === "" || understanding === "") return;
+    if (url === "" || understanding === null) return;
 
     const { wordId, addKnowldge } = this.props;
     addKnowldge(wordId, url, understanding);
-    this.setState({ url: "", understanding: "" });
+    this.setState({ url: "", understanding: null });
   }
 
   handleChangeInput(event) {
@@ -32,18 +32,17 @@ class Form extends Component {
     this.setState({ [name]: value });
   }
 
+  handleChangeRating(value) {
+    this.setState({ understanding: value });
+  }
+
   render() {
     const { url, understanding } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={this.handleChangeInput} />
-        <KnolwedgeUnderstandingField
-          name="understanding"
-          placeholder="理解度"
-          value={understanding}
-          onChange={this.handleChangeInput}
-        />
+        <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={this.handleChangeInput.bind(this)} />
+        <KnowledgeRating fractions={2} initialRating={understanding} onClick={this.handleChangeRating.bind(this)} />
         <Submit />
       </form>
     );
@@ -51,11 +50,12 @@ class Form extends Component {
 }
 
 const KnowledgeUrlField = styled(UrlField)`
-  border-right: none;
+  margin-right: 0.5rem;
 `;
 
-const KnolwedgeUnderstandingField = styled(NumberField)`
-  border-right: none;
+const KnowledgeRating = styled(Rating)`
+  vertical-align: middle;
+  margin-right: 0.5rem;
 `;
 
 function mapStateToProps(state) {

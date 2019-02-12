@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import Rating from "react-rating";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { EditButton, ListItem, NumberField, RemoveButton, Submit, UrlField } from "../../atoms/Common";
+import { EditButton, ListItem, RemoveButton, Submit, UrlField } from "../../atoms/Common";
 import { updateKnowledge, removeKnowledge } from "../../../actions";
 
 class Knowledge extends Component {
@@ -14,8 +15,6 @@ class Knowledge extends Component {
       knowledgeUrl: knowledge.url,
       knowledgeUnderstanding: knowledge.understanding
     };
-
-    this.handleChangeInput = this.handleChangeInput.bind(this);
   }
 
   handleClickEdit() {
@@ -26,7 +25,7 @@ class Knowledge extends Component {
     event.preventDefault();
     const { knowledge, updateKnowledge } = this.props;
     const { knowledgeUrl, knowledgeUnderstanding } = this.state;
-    if (knowledgeUrl === "" || knowledgeUnderstanding === "") return;
+    if (knowledgeUrl === "" || knowledgeUnderstanding === null) return;
 
     updateKnowledge(knowledge.id, knowledgeUrl, knowledgeUnderstanding);
     this.setState({ isEditing: false });
@@ -38,6 +37,10 @@ class Knowledge extends Component {
     this.setState({ [name]: value });
   }
 
+  handleChangeRating(value) {
+    this.setState({ knowledgeUnderstanding: value });
+  }
+
   render() {
     const { wordId, knowledge } = this.props;
     const { isEditing, knowledgeUrl, knowledgeUnderstanding } = this.state;
@@ -47,13 +50,12 @@ class Knowledge extends Component {
           name="knowledgeUrl"
           placeholder="URL"
           value={knowledgeUrl}
-          onChange={this.handleChangeInput}
+          onChange={this.handleChangeInput.bind(this)}
         />
-        <KnolwedgeUnderstandingField
-          name="knowledgeUnderstanding"
-          placeholder="理解度"
-          value={knowledgeUnderstanding}
-          onChange={this.handleChangeInput}
+        <KnowledgeRating
+          fractions={2}
+          initialRating={knowledgeUnderstanding}
+          onClick={this.handleChangeRating.bind(this)}
         />
         <Submit />
       </form>
@@ -85,11 +87,12 @@ const EditButtonWithMarginRight = styled(EditButton)`
 `;
 
 const KnowledgeUrlField = styled(UrlField)`
-  border-right: none;
+  margin-right: 0.5rem;
 `;
 
-const KnolwedgeUnderstandingField = styled(NumberField)`
-  border-right: none;
+const KnowledgeRating = styled(Rating)`
+  vertical-align: middle;
+  margin-right: 0.5rem;
 `;
 
 function mapDispatchToProps(dispatch) {
