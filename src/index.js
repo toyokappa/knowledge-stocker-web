@@ -8,6 +8,8 @@ import { routerMiddleware } from "connected-react-router";
 import Router from "./Router";
 import rootReducer from "./reducers";
 import { BaseStyles } from "./constants/styles";
+import "./vendor/FontAwesome";
+import "font-awesome/css/font-awesome.min.css";
 import * as serviceWorker from "./serviceWorker";
 
 const history = createBrowserHistory();

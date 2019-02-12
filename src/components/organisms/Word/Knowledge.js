@@ -53,6 +53,8 @@ class Knowledge extends Component {
           onChange={this.handleChangeInput.bind(this)}
         />
         <KnowledgeRating
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
           fractions={2}
           initialRating={knowledgeUnderstanding}
           onClick={this.handleChangeRating.bind(this)}
@@ -91,6 +93,8 @@ const KnowledgeUrlField = styled(UrlField)`
 `;
 
 const KnowledgeRating = styled(Rating)`
+  color: gold;
+  font-size: 1rem;
   vertical-align: middle;
   margin-right: 0.5rem;
 `;

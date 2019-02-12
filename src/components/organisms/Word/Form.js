@@ -42,7 +42,13 @@ class Form extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={this.handleChangeInput.bind(this)} />
-        <KnowledgeRating fractions={2} initialRating={understanding} onClick={this.handleChangeRating.bind(this)} />
+        <KnowledgeRating
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
+          fractions={2}
+          initialRating={understanding}
+          onClick={this.handleChangeRating.bind(this)}
+        />
         <Submit />
       </form>
     );
@@ -54,6 +60,8 @@ const KnowledgeUrlField = styled(UrlField)`
 `;
 
 const KnowledgeRating = styled(Rating)`
+  color: gold;
+  font-size: 1rem;
   vertical-align: middle;
   margin-right: 0.5rem;
 `;
