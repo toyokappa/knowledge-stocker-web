@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { EditButton, ListItem, NumberField, RemoveButton, Submit, UrlField } from "../../atoms/Common";
 import { updateKnowledge, removeKnowledge } from "../../../actions";
 
 class Knowledge extends Component {
@@ -41,29 +43,54 @@ class Knowledge extends Component {
     const { isEditing, knowledgeUrl, knowledgeUnderstanding } = this.state;
     const editKnowledgeForm = (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" name="knowledgeUrl" value={knowledgeUrl} onChange={this.handleChangeInput} />
-        <input
-          type="number"
+        <KnowledgeUrlField
+          name="knowledgeUrl"
+          placeholder="URL"
+          value={knowledgeUrl}
+          onChange={this.handleChangeInput}
+        />
+        <KnolwedgeUnderstandingField
           name="knowledgeUnderstanding"
+          placeholder="理解度"
           value={knowledgeUnderstanding}
           onChange={this.handleChangeInput}
         />
-        <input type="submit" />
+        <Submit />
       </form>
     );
     const showKnowledge = (
       <>
-        <a href={knowledge.url} target="_blank" rel="noopener noreferrer">
+        <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
           {knowledge.url}
-        </a>
-        <span> 理解度: {knowledge.understanding}</span>
-        <span onClick={this.handleClickEdit.bind(this)}> 編集</span>
-        <span onClick={() => removeKnowledge(wordId, knowledge.id)}> x</span>
+        </KnowledgeLink>
+        <KnowledgeUnderstanding>理解度: {knowledge.understanding}</KnowledgeUnderstanding>
+        <EditButtonWithMarginRight onClick={this.handleClickEdit.bind(this)} />
+        <RemoveButton onClick={() => removeKnowledge(wordId, knowledge.id)} />
       </>
     );
-    return <li>{isEditing ? editKnowledgeForm : showKnowledge}</li>;
+    return <ListItem>{isEditing ? editKnowledgeForm : showKnowledge}</ListItem>;
   }
 }
+
+const KnowledgeLink = styled.a`
+  margin-right: 0.5rem;
+`;
+
+const KnowledgeUnderstanding = styled.span`
+  margin-right: 0.5rem;
+`;
+
+const EditButtonWithMarginRight = styled(EditButton)`
+  margin-right: 0.5rem;
+`;
+
+const KnowledgeUrlField = styled(UrlField)`
+  border-right: none;
+`;
+
+const KnolwedgeUnderstandingField = styled(NumberField)`
+  border-right: none;
+`;
 
 function mapDispatchToProps(dispatch) {
   return {

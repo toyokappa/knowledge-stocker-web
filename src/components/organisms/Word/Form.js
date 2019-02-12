@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { NumberField, Submit, UrlField } from "../../atoms/Common";
 import { addKnowledge } from "../../../actions";
 
 class Form extends Component {
@@ -35,13 +37,26 @@ class Form extends Component {
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" name="url" value={url} onChange={this.handleChangeInput} />
-        <input type="number" name="understanding" value={understanding} onChange={this.handleChangeInput} />
-        <input type="submit" />
+        <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={this.handleChangeInput} />
+        <KnolwedgeUnderstandingField
+          name="understanding"
+          placeholder="理解度"
+          value={understanding}
+          onChange={this.handleChangeInput}
+        />
+        <Submit />
       </form>
     );
   }
 }
+
+const KnowledgeUrlField = styled(UrlField)`
+  border-right: none;
+`;
+
+const KnolwedgeUnderstandingField = styled(NumberField)`
+  border-right: none;
+`;
 
 function mapStateToProps(state) {
   return {

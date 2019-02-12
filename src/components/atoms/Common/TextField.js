@@ -9,6 +9,6 @@ const TextField = styled.input.attrs({
   border: 3px solid black;
 `;
 
-const TextFieldComponent = ({ ...props }) => <TextField {...props} />;
+const TextFieldComponent = ({ inputRef, ...props }) => <TextField {...props} ref={inputRef} />;
 
 export default TextFieldComponent;

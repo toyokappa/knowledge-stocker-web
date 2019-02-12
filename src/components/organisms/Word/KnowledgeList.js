@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
 import Knowledge from "./Knowledge";
@@ -11,8 +12,12 @@ function KnowledgeList(props) {
     return <Knowledge key={knowledge.id} wordId={wordId} knowledge={knowledge} />;
   });
 
-  return <ul>{knowledgeList}</ul>;
+  return <List>{knowledgeList}</List>;
 }
+
+const List = styled.ul`
+  padding: 0;
+`;
 
 function mapStateToProps(state) {
   return {

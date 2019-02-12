@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { EditButton, Submit, TextField, Title } from "../../atoms/Common";
 import { updateWord } from "../../../actions";
 
 class WordText extends Component {
   constructor(props) {
     super(props);
 
+    this.editWordRef = React.createRef();
     this.wordId = this.props.wordId;
     const { words } = this.props;
     const word = words[this.wordId];
@@ -18,7 +21,7 @@ class WordText extends Component {
   }
 
   componentDidUpdate() {
-    let editWordText = ReactDOM.findDOMNode(this.refs.editWordText);
+    const editWordText = ReactDOM.findDOMNode(this.editWordRef.current);
     editWordText && editWordText.focus();
   }
 
@@ -48,20 +51,39 @@ class WordText extends Component {
     const word = words[this.wordId];
 
     const editWordForm = (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" value={wordText} ref="editWordText" onChange={this.handleChangeInput.bind(this)} />
-      </form>
+      <WordForm onSubmit={this.handleSubmit.bind(this)}>
+        <WordTextField value={wordText} inputRef={this.editWordRef} onChange={this.handleChangeInput.bind(this)} />
+        <Submit />
+      </WordForm>
     );
     const showWord = (
-      <>
-        <h1>{word.text}</h1>
-        <div onClick={this.handleClickEdit.bind(this)}>編集</div>
-      </>
+      <WordArea>
+        <WordTitle>{word.text}</WordTitle>
+        <EditButton onClick={this.handleClickEdit.bind(this)} />
+      </WordArea>
     );
 
     return isEditing ? editWordForm : showWord;
   }
 }
+
+const WordForm = styled.form`
+  margin-bottom: 1rem;
+`;
+
+const WordTextField = styled(TextField)`
+  border-right: none;
+`;
+
+const WordArea = styled.div`
+  margin-bottom: 1rem;
+  vertical-align: middle;
+`;
+
+const WordTitle = styled(Title)`
+  display: inline-block;
+  margin-right: 0.5rem;
+`;
 
 function mapStateToProps(state) {
   return {
