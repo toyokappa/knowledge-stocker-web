@@ -1,10 +1,4 @@
-const initialState = {
-  0: {
-    id: 0,
-    text: "initial state",
-    knowledges: []
-  }
-};
+const initialState = {};
 
 function addWord(state, action) {
   const { wordId, wordText } = action;

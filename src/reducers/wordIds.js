@@ -1,4 +1,4 @@
-const initState = [0];
+const initState = [];
 
 function addWord(state, action) {
   const { wordId } = action;
