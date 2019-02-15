@@ -1,5 +1,3 @@
-let knowledgeNextId = 1;
-
 export function addWord(wordId, wordText) {
   return { type: "ADD_WORD", wordId, wordText };
 }
@@ -12,10 +10,10 @@ export function removeWord(wordId, knowledgeIds) {
   return { type: "REMOVE_WORD", wordId, knowledgeIds };
 }
 
-export function addKnowledge(wordId, url, understanding) {
+export function addKnowledge(knowledgeId, wordId, url, understanding) {
   return {
     type: "ADD_KNOWLEDGE",
-    knowledgeId: knowledgeNextId++,
+    knowledgeId,
     wordId,
     url,
     understanding

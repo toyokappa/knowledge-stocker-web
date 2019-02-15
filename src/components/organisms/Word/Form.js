@@ -21,8 +21,9 @@ class Form extends Component {
     const { url, understanding } = this.state;
     if (url === "" || understanding === null) return;
 
-    const { wordId, addKnowldge } = this.props;
-    addKnowldge(wordId, url, understanding);
+    const { wordId, addKnowldge, nextId } = this.props;
+    console.log(nextId);
+    addKnowldge(nextId.knowledgeId, wordId, url, understanding);
     this.setState({ url: "", understanding: null });
   }
 
@@ -69,13 +70,15 @@ const KnowledgeRating = styled(Rating)`
 function mapStateToProps(state) {
   return {
     words: state.words,
-    knowledges: state.knowledges
+    knowledges: state.knowledges,
+    nextId: state.nextId
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addKnowldge: (wordId, url, understanding) => dispatch(addKnowledge(wordId, url, understanding))
+    addKnowldge: (knowledgeId, wordId, url, understanding) =>
+      dispatch(addKnowledge(knowledgeId, wordId, url, understanding))
   };
 }
 
