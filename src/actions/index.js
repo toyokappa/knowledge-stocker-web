@@ -1,8 +1,7 @@
-let wordNextId = 1;
 let knowledgeNextId = 1;
 
-export function addWord(wordText) {
-  return { type: "ADD_WORD", wordId: wordNextId++, wordText };
+export function addWord(wordId, wordText) {
+  return { type: "ADD_WORD", wordId, wordText };
 }
 
 export function updateWord(wordId, wordText) {

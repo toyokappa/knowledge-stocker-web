@@ -18,11 +18,12 @@ class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const { nextId } = this.props;
     const { wordText } = this.state;
     if (wordText === "") return;
 
     const { addWord } = this.props;
-    addWord(wordText);
+    addWord(nextId.wordId, wordText);
     this.setState({ wordText: "" });
   }
 
@@ -46,13 +47,19 @@ const WordTextField = styled(TextField)`
   border-right: none;
 `;
 
+function mapStateToProps(state) {
+  return {
+    nextId: state.nextId
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-    addWord: wordText => dispatch(addWord(wordText))
+    addWord: (wordId, wordText) => dispatch(addWord(wordId, wordText))
   };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Form);
