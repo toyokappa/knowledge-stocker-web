@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import BaseLayout from "../templates/BaseLayout";
 import WordText from "../organisms/Word/WordText";
 import Form from "../organisms/Word/Form";
 import KnowledgeList from "../organisms/Word/KnowledgeList";
@@ -11,11 +12,11 @@ export default function Word(props) {
   const { wordId } = params;
 
   return (
-    <>
+    <BaseLayout>
       <WordText wordId={wordId} />
       <Form wordId={wordId} />
       <KnowledgeList wordId={wordId} />
       <Link to="/">一覧に戻る</Link>
-    </>
+    </BaseLayout>
   );
 }
