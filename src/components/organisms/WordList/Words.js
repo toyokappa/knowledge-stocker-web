@@ -11,23 +11,51 @@ function Words(props) {
   const wordList = wordIds.map(wordId => {
     const word = words[wordId];
     return (
-      <ListItem key={word.id}>
+      <WordListItem key={word.id}>
         <WordLink to={`/words/${word.id}`}>{word.text}</WordLink>
         <RemoveButton onClick={() => removeWord(word.id, word.knowledges)} />
-      </ListItem>
+      </WordListItem>
     );
   });
-  return <WordList>{wordList.reverse()}</WordList>;
+
+  const noList = <NoList>表示できる単語はありません</NoList>;
+  return <WordList>{wordList.length > 0 ? wordList.reverse() : noList}</WordList>;
 }
+
+const WordListItem = styled(ListItem)`
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 3px solid black;
+`;
 
 const WordLink = styled(Link)`
   color: black;
+  font-weight: bold;
   text-decoration: none;
-  margin-right: 0.5rem;
+  margin-right: auto;
+`;
+
+const NoList = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: grey;
+  font-size: 1.2rem;
+  font-weight: bold;
 `;
 
 const WordList = styled.ul`
+  position: relative;
+  height: calc(100% - 40px);
+  overflow-y: scroll;
   padding: 0;
+  border-right: 3px solid black;
+  border-left: 3px solid black;
+  border-bottom: 3px solid black;
+  margin: 0;
 `;
 
 function filterWordIds(wordIds, words, filter) {

@@ -13,7 +13,7 @@ export default function BaseLayout(props) {
         </Logo>
         <HeaderNav>
           <NavItem>
-            <NavLink to="/">単語一覧</NavLink>
+            <NavLink to="/">ホーム</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/">成績</NavLink>
@@ -34,11 +34,14 @@ const BaseContainer = styled.div`
 `;
 
 const Header = styled.header`
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
+  width: 100%;
   background-color: gold;
   padding: 20px 30px;
-  margin-bottom: 60px;
+  box-sizing: border-box;
 `;
 
 const Logo = styled.div`
@@ -62,20 +65,25 @@ const NavItem = styled.li`
 
 const NavLink = styled(Link)`
   color: black;
+  font-weight: bold;
   text-decoration: none;
   padding: 5px 10px;
 `;
 
 const Wrapper = styled.div`
   padding: 0 30px;
-  margin-bottom: 60px;
+  margin-top: 93px;
+  margin-bottom: 88px;
 `;
 
 const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   color: white;
   background-color: #333;
-  padding: 30px 0;
+  padding: 20px 0;
 `;
 
 const Copylight = styled.div`

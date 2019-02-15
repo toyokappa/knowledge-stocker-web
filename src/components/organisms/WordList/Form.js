@@ -35,15 +35,28 @@ class Form extends Component {
   render() {
     const { wordText } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <WordTextField value={wordText} onChange={this.handleChangeInput} />
-        <Submit />
-      </form>
+      <WordForm onSubmit={this.handleSubmit}>
+        <WordTextLabel htmlFor="wordText">「ワカラン」単語を入力</WordTextLabel>
+        <WordTextField value={wordText} id="wordText" onChange={this.handleChangeInput} />
+        <Submit value="追加" />
+      </WordForm>
     );
   }
 }
 
+const WordForm = styled.form`
+  text-align: center;
+`;
+
+const WordTextLabel = styled.label`
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+`;
+
 const WordTextField = styled(TextField)`
+  width: 50%;
   border-right: none;
 `;
 

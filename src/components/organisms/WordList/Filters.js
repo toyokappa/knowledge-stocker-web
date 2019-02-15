@@ -24,7 +24,7 @@ function Filters(props) {
 const TabMenu = styled.ul`
   padding: 0;
   border-bottom: 3px solid black;
-  margin: 0 0 1rem;
+  margin: 0;
 `;
 
 const TabItem = styled.li`
