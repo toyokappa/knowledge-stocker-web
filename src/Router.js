@@ -4,6 +4,7 @@ import { ConnectedRouter } from "connected-react-router";
 
 import WordList from "./components/pages/WordList";
 import Word from "./components/pages/Word";
+import Achievement from "./components/pages/Achievement";
 
 export default function Router(props) {
   const { history } = props;
@@ -13,6 +14,7 @@ export default function Router(props) {
       <Switch>
         <Route exact path="/" component={WordList} />
         <Route exact path="/words/:wordId" component={Word} />
+        <Route exact path="/achievements" component={Achievement} />
       </Switch>
     </ConnectedRouter>
   );

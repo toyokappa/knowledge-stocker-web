@@ -16,7 +16,7 @@ export default function BaseLayout(props) {
             <NavLink to="/">ホーム</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/">成績</NavLink>
+            <NavLink to="/achievements">成績</NavLink>
           </NavItem>
         </HeaderNav>
       </Header>
