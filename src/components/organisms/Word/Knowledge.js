@@ -65,7 +65,7 @@ class Knowledge extends Component {
     const showKnowledge = (
       <>
         <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
-          {knowledge.url}
+          {knowledge.title}
         </KnowledgeLink>
         <KnowledgeUnderstanding>理解度: {knowledge.understanding}</KnowledgeUnderstanding>
         <EditButtonWithMarginRight onClick={this.handleClickEdit.bind(this)} />

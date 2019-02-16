@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import BaseLayout from "../templates/BaseLayout";
 import WordText from "../organisms/Word/WordText";
@@ -16,7 +15,6 @@ export default function Word(props) {
       <WordText wordId={wordId} />
       <Form wordId={wordId} />
       <KnowledgeList wordId={wordId} />
-      <Link to="/">一覧に戻る</Link>
     </BaseLayout>
   );
 }
