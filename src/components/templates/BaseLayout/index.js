@@ -74,6 +74,7 @@ const Wrapper = styled.div`
   padding: 0 30px;
   margin-top: 93px;
   margin-bottom: 88px;
+  height: calc(100vh - 181px);
 `;
 
 const Footer = styled.footer`

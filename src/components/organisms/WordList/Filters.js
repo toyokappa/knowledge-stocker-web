@@ -12,7 +12,7 @@ function Filters(props) {
         ワカラン
       </TabItem>
       <TabItem isActive={filter === "welknown"} onClick={() => setFilter("welknown")}>
-        理解シタ
+        ワカッタ
       </TabItem>
       <TabItem isActive={filter === "all"} onClick={() => setFilter("all")}>
         スベテ

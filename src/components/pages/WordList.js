@@ -24,7 +24,7 @@ export default function WordList() {
 
 const Container = styled.div`
   display: flex;
-  height: calc(100vh - 181px);
+  height: 100%;
 `;
 
 const FormContainer = styled.div`
