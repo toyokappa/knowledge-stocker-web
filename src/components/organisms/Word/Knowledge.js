@@ -42,7 +42,7 @@ class Knowledge extends Component {
   }
 
   render() {
-    const { wordId, knowledge } = this.props;
+    const { wordId, knowledge, removeKnowledge } = this.props;
     const { isEditing, knowledgeUrl, knowledgeUnderstanding } = this.state;
     const editKnowledgeForm = (
       <form onSubmit={this.handleSubmit.bind(this)}>
