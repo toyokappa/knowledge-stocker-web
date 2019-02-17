@@ -11,9 +11,15 @@ function KnowledgeList(props) {
     const knowledge = knowledges[knowledgeId];
     return <Knowledge key={knowledge.id} wordId={wordId} knowledge={knowledge} />;
   });
+  const emptyState = <EmptyState>表示できるナレッジはありません</EmptyState>;
 
-  return <List>{knowledgeList}</List>;
+  return knowledgeList.length > 0 ? <List>{knowledgeList}</List> : emptyState;
 }
+
+const EmptyState = styled.div`
+  color: grey;
+  font-weight: bold;
+`;
 
 const List = styled.ul`
   padding: 0;
