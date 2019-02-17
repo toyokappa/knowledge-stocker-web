@@ -59,7 +59,7 @@ class Knowledge extends Component {
           initialRating={knowledgeUnderstanding}
           onClick={this.handleChangeRating.bind(this)}
         />
-        <Submit />
+        <KnowledgeSubmit value="更新" />
       </form>
     );
     const showKnowledge = (
@@ -113,14 +113,22 @@ const KnowledgeUrl = styled.div`
 `;
 
 const KnowledgeUrlField = styled(UrlField)`
+  font-size: 0.8rem;
+  width: 30%;
+  vertical-align: middle;
   margin-right: 0.5rem;
 `;
 
 const KnowledgeRating = styled(Rating)`
   color: gold;
-  font-size: 1rem;
+  font-size: 0.8rem;
   vertical-align: middle;
   margin-right: 0.5rem;
+`;
+
+const KnowledgeSubmit = styled(Submit)`
+  font-size: 0.8rem;
+  vertical-align: middle;
 `;
 
 function mapDispatchToProps(dispatch) {
