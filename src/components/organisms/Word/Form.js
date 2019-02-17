@@ -41,7 +41,7 @@ class Form extends Component {
     const { url, understanding } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <KnowledgeForm onSubmit={this.handleSubmit.bind(this)}>
         <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={this.handleChangeInput.bind(this)} />
         <KnowledgeRating
           emptySymbol="fa fa-star-o fa-2x"
@@ -50,13 +50,21 @@ class Form extends Component {
           initialRating={understanding}
           onClick={this.handleChangeRating.bind(this)}
         />
-        <Submit />
-      </form>
+        <KnowledgeSubmit value="追加" />
+      </KnowledgeForm>
     );
   }
 }
 
+const KnowledgeForm = styled.form`
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 2rem;
+`;
+
 const KnowledgeUrlField = styled(UrlField)`
+  width: 50%;
+  vertical-align: middle;
   margin-right: 0.5rem;
 `;
 
@@ -65,6 +73,10 @@ const KnowledgeRating = styled(Rating)`
   font-size: 1rem;
   vertical-align: middle;
   margin-right: 0.5rem;
+`;
+
+const KnowledgeSubmit = styled(Submit)`
+  vertical-align: middle;
 `;
 
 function mapStateToProps(state) {
