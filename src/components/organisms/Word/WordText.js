@@ -53,7 +53,7 @@ class WordText extends Component {
     const editWordForm = (
       <WordForm onSubmit={this.handleSubmit.bind(this)}>
         <WordTextField value={wordText} inputRef={this.editWordRef} onChange={this.handleChangeInput.bind(this)} />
-        <Submit />
+        <Submit value="更新" />
       </WordForm>
     );
     const showWord = (
@@ -72,6 +72,7 @@ const WordForm = styled.form`
 `;
 
 const WordTextField = styled(TextField)`
+  width: 30%;
   border-right: none;
 `;
 
