@@ -65,27 +65,51 @@ class Knowledge extends Component {
     const showKnowledge = (
       <>
         <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
-          {knowledge.title}
+          <KnowledgeTitle>{knowledge.title}</KnowledgeTitle>
+          <KnowledgeRating
+            emptySymbol="fa fa-star-o"
+            fullSymbol="fa fa-star"
+            fractions={2}
+            initialRating={knowledge.understanding}
+            readonly
+          />
         </KnowledgeLink>
-        <KnowledgeUnderstanding>理解度: {knowledge.understanding}</KnowledgeUnderstanding>
         <EditButtonWithMarginRight onClick={this.handleClickEdit.bind(this)} />
         <RemoveButton onClick={() => removeKnowledge(wordId, knowledge.id)} />
+        <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
+          <KnowledgeUrl>{knowledge.url}</KnowledgeUrl>
+        </KnowledgeLink>
       </>
     );
-    return <ListItem>{isEditing ? editKnowledgeForm : showKnowledge}</ListItem>;
+    return <KnowledgeListItem>{isEditing ? editKnowledgeForm : showKnowledge}</KnowledgeListItem>;
   }
 }
 
-const KnowledgeLink = styled.a`
-  margin-right: 0.5rem;
+const KnowledgeListItem = styled(ListItem)`
+  margin-bottom: 1.75rem;
 `;
 
-const KnowledgeUnderstanding = styled.span`
+const KnowledgeLink = styled.a`
+  text-decoration: none;
+`;
+
+const KnowledgeTitle = styled.div`
+  display: inline-block;
+  font-weight: bold;
   margin-right: 0.5rem;
+  margin-bottom: 0.75rem;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const EditButtonWithMarginRight = styled(EditButton)`
   margin-right: 0.5rem;
+`;
+
+const KnowledgeUrl = styled.div`
+  color: gold;
+  font-size: 0.8rem;
 `;
 
 const KnowledgeUrlField = styled(UrlField)`
