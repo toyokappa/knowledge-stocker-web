@@ -1,14 +1,19 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 const EditButton = styled.span`
-  color: white;
-  background-color: green;
-  font-size: 0.8rem;
-  padding: 0.375rem 0.75rem;
+  color: #ccc;
   cursor: pointer;
+  &:hover {
+    color: green;
+  }
 `;
 
-const EditButtonComponent = ({ ...props }) => <EditButton {...props}>編集</EditButton>;
+const EditButtonComponent = ({ ...props }) => (
+  <EditButton {...props}>
+    <FontAwesomeIcon icon={["fas", "pencil-alt"]} />
+  </EditButton>
+);
 
 export default EditButtonComponent;

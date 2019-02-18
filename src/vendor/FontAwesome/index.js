@@ -1,2 +1,3 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add();
+import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+library.add(faPencilAlt, faTrashAlt);
