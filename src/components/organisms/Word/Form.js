@@ -22,7 +22,6 @@ class Form extends Component {
     if (url === "" || understanding === null) return;
 
     const { wordId, addKnowldge, nextId } = this.props;
-    console.log(nextId);
     addKnowldge(nextId.knowledgeId, wordId, url, understanding);
     this.setState({ url: "", understanding: null });
   }
