@@ -1,3 +1,3 @@
-import NoList from "./NoList";
+import EmptyState from "./EmptyState";
 
-export { NoList };
+export { EmptyState };

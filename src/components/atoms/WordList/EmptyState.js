@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const NoList = styled.li`
+const EmptyState = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,6 +12,6 @@ const NoList = styled.li`
   font-weight: bold;
 `;
 
-const NoListComponent = ({ ...props }) => <NoList {...props}>表示できる単語はありません</NoList>;
+const EmptyStateComponent = ({ ...props }) => <EmptyState {...props}>表示できる単語はありません</EmptyState>;
 
-export default NoListComponent;
+export default EmptyStateComponent;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { NoList } from "../../atoms/WordList";
+import { EmptyState } from "../../atoms/WordList";
 import Word from "./Word";
 
 function Words(props) {
@@ -12,7 +12,7 @@ function Words(props) {
     return <Word word={word} key={word.id} />;
   });
 
-  return <WordList>{wordList.length > 0 ? wordList : <NoList />}</WordList>;
+  return <WordList>{wordList.length > 0 ? wordList : <EmptyState />}</WordList>;
 }
 
 const WordList = styled.ul`
