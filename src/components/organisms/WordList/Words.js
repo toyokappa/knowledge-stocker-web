@@ -1,51 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { ListItem, RemoveButton } from "../../atoms/Common";
-import { removeWord } from "../../../actions";
+import { NoList } from "../../atoms/WordList";
+import Word from "./Word";
 
 function Words(props) {
-  const { wordIds, words, removeWord } = props;
-  const wordList = wordIds.map(wordId => {
+  const { wordIds, words } = props;
+  const wordList = wordIds.reverse().map(wordId => {
     const word = words[wordId];
-    return (
-      <WordListItem key={word.id}>
-        <WordLink to={`/words/${word.id}`}>{word.text}</WordLink>
-        <RemoveButton onClick={() => removeWord(word.id, word.knowledges)} />
-      </WordListItem>
-    );
+    return <Word word={word} key={word.id} />;
   });
 
-  const noList = <NoList>表示できる単語はありません</NoList>;
-  return <WordList>{wordList.length > 0 ? wordList.reverse() : noList}</WordList>;
+  return <WordList>{wordList.length > 0 ? wordList : <NoList />}</WordList>;
 }
-
-const WordListItem = styled(ListItem)`
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  border-bottom: 3px solid black;
-`;
-
-const WordLink = styled(Link)`
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-  margin-right: auto;
-`;
-
-const NoList = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  color: grey;
-  font-size: 1.2rem;
-  font-weight: bold;
-`;
 
 const WordList = styled.ul`
   position: relative;
@@ -78,13 +46,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    removeWord: (wordId, knowledgeIds) => dispatch(removeWord(wordId, knowledgeIds))
-  };
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Words);
