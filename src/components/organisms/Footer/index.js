@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Copylight } from "../../atoms/Common";
+
 export default function Footer() {
   return (
     <FooterContainer>
-      <Copylight>&copy;2019 toyokappa</Copylight>
+      <Copylight />
     </FooterContainer>
   );
 }
@@ -16,8 +18,4 @@ const FooterContainer = styled.footer`
   color: white;
   background-color: #333;
   padding: 20px 0;
-`;
-
-const Copylight = styled.div`
-  font-weight: bold;
 `;
