@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { EditButton, Submit, TextField, Title } from "../../atoms/Common";
+import { EditWordForm, ShowWord } from "../../molecules/Word";
 import { updateWord } from "../../../actions";
 
 class WordText extends Component {
@@ -51,41 +50,18 @@ class WordText extends Component {
     const word = words[this.wordId];
 
     const editWordForm = (
-      <WordForm onSubmit={this.handleSubmit.bind(this)}>
-        <WordTextField value={wordText} inputRef={this.editWordRef} onChange={this.handleChangeInput.bind(this)} />
-        <Submit value="更新" />
-      </WordForm>
+      <EditWordForm
+        wordText={wordText}
+        onSubmit={this.handleSubmit.bind(this)}
+        onChange={this.handleChangeInput.bind(this)}
+        inputRef={this.editWordRef}
+      />
     );
-    const showWord = (
-      <WordArea>
-        <WordTitle>{word.text}</WordTitle>
-        <EditButton onClick={this.handleClickEdit.bind(this)} />
-      </WordArea>
-    );
+    const showWord = <ShowWord word={word} onClick={this.handleClickEdit.bind(this)} />;
 
     return isEditing ? editWordForm : showWord;
   }
 }
-
-const WordForm = styled.form`
-  margin-bottom: 1rem;
-`;
-
-const WordTextField = styled(TextField)`
-  width: 30%;
-  border-right: none;
-`;
-
-const WordArea = styled.div`
-  margin-bottom: 1rem;
-  vertical-align: middle;
-`;
-
-const WordTitle = styled(Title)`
-  display: inline-block;
-  margin-right: 0.5rem;
-`;
-
 function mapStateToProps(state) {
   return {
     words: state.words
