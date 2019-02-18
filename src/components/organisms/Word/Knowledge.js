@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Rating from "react-rating";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { EditButton, ListItem, RemoveButton, Submit, UrlField } from "../../atoms/Common";
+import { ListItem } from "../../atoms/Common";
+import { EditKnowledgeForm, ShowKnowledge } from "../../molecules/Word";
 import { updateKnowledge, removeKnowledge } from "../../../actions";
 
 class Knowledge extends Component {
@@ -12,8 +12,8 @@ class Knowledge extends Component {
     const { knowledge } = this.props;
     this.state = {
       isEditing: false,
-      knowledgeUrl: knowledge.url,
-      knowledgeUnderstanding: knowledge.understanding
+      url: knowledge.url,
+      understanding: knowledge.understanding
     };
   }
 
@@ -24,10 +24,10 @@ class Knowledge extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { knowledge, updateKnowledge } = this.props;
-    const { knowledgeUrl, knowledgeUnderstanding } = this.state;
-    if (knowledgeUrl === "" || knowledgeUnderstanding === null) return;
+    const { url, understanding } = this.state;
+    if (url === "" || understanding === null) return;
 
-    updateKnowledge(knowledge.id, knowledgeUrl, knowledgeUnderstanding);
+    updateKnowledge(knowledge.id, url, understanding);
     this.setState({ isEditing: false });
   }
 
@@ -38,48 +38,27 @@ class Knowledge extends Component {
   }
 
   handleChangeRating(value) {
-    this.setState({ knowledgeUnderstanding: value });
+    this.setState({ understanding: value });
   }
 
   render() {
     const { wordId, knowledge, removeKnowledge } = this.props;
-    const { isEditing, knowledgeUrl, knowledgeUnderstanding } = this.state;
+    const { isEditing, url, understanding } = this.state;
     const editKnowledgeForm = (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <KnowledgeUrlField
-          name="knowledgeUrl"
-          placeholder="URL"
-          value={knowledgeUrl}
-          onChange={this.handleChangeInput.bind(this)}
-        />
-        <KnowledgeRating
-          emptySymbol="fa fa-star-o fa-2x"
-          fullSymbol="fa fa-star fa-2x"
-          fractions={2}
-          initialRating={knowledgeUnderstanding}
-          onClick={this.handleChangeRating.bind(this)}
-        />
-        <KnowledgeSubmit value="更新" />
-      </form>
+      <EditKnowledgeForm
+        url={url}
+        understanding={understanding}
+        onSubmit={this.handleSubmit.bind(this)}
+        onChange={this.handleChangeInput.bind(this)}
+        onClick={this.handleChangeRating.bind(this)}
+      />
     );
     const showKnowledge = (
-      <>
-        <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
-          <KnowledgeTitle>{knowledge.title}</KnowledgeTitle>
-          <KnowledgeRating
-            emptySymbol="fa fa-star-o"
-            fullSymbol="fa fa-star"
-            fractions={2}
-            initialRating={knowledge.understanding}
-            readonly
-          />
-        </KnowledgeLink>
-        <EditButtonWithMarginRight onClick={this.handleClickEdit.bind(this)} />
-        <RemoveButton onClick={() => removeKnowledge(wordId, knowledge.id)} />
-        <KnowledgeLink href={knowledge.url} target="_blank" rel="noopener noreferrer">
-          <KnowledgeUrl>{knowledge.url}</KnowledgeUrl>
-        </KnowledgeLink>
-      </>
+      <ShowKnowledge
+        knowledge={knowledge}
+        showEditForm={this.handleClickEdit.bind(this)}
+        removeKnowledge={() => removeKnowledge(wordId, knowledge.id)}
+      />
     );
     return <KnowledgeListItem>{isEditing ? editKnowledgeForm : showKnowledge}</KnowledgeListItem>;
   }
@@ -87,48 +66,6 @@ class Knowledge extends Component {
 
 const KnowledgeListItem = styled(ListItem)`
   margin-bottom: 1.75rem;
-`;
-
-const KnowledgeLink = styled.a`
-  text-decoration: none;
-`;
-
-const KnowledgeTitle = styled.div`
-  display: inline-block;
-  font-weight: bold;
-  margin-right: 0.5rem;
-  margin-bottom: 0.75rem;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const EditButtonWithMarginRight = styled(EditButton)`
-  margin-right: 0.5rem;
-`;
-
-const KnowledgeUrl = styled.div`
-  color: gold;
-  font-size: 0.8rem;
-`;
-
-const KnowledgeUrlField = styled(UrlField)`
-  font-size: 0.8rem;
-  width: 30%;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-`;
-
-const KnowledgeRating = styled(Rating)`
-  color: gold;
-  font-size: 0.8rem;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-`;
-
-const KnowledgeSubmit = styled(Submit)`
-  font-size: 0.8rem;
-  vertical-align: middle;
 `;
 
 function mapDispatchToProps(dispatch) {
