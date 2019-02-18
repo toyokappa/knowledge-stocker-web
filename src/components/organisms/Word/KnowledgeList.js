@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { EmptyState } from "../../atoms/Word";
 import Knowledge from "./Knowledge";
 
 function KnowledgeList(props) {
@@ -14,15 +15,9 @@ function KnowledgeList(props) {
     const knowledge = knowledges[knowledgeId];
     return <Knowledge key={knowledge.id} wordId={wordId} knowledge={knowledge} />;
   });
-  const emptyState = <EmptyState>表示できるナレッジはありません</EmptyState>;
 
-  return knowledgeList.length > 0 ? <List>{knowledgeList}</List> : emptyState;
+  return <List>{knowledgeList.length > 0 ? knowledgeList : <EmptyState />}</List>;
 }
-
-const EmptyState = styled.div`
-  color: grey;
-  font-weight: bold;
-`;
 
 const List = styled.ul`
   padding: 0;
