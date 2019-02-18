@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import _ from "lodash";
 import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";

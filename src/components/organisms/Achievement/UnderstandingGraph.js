@@ -1,7 +1,6 @@
 import React from "react";
 import Circle from "react-circle";
 import styled from "styled-components";
-import _ from "lodash";
 
 export default function UnderstandingGraph(props) {
   const { wordIds, understoodWordIds } = props;

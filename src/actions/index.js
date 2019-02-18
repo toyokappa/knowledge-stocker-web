@@ -1,5 +1,4 @@
 import search from "../apis/googleApi";
-import { dispatch } from "rxjs/internal/observable/pairs";
 
 export function addWord(wordId, wordText) {
   return { type: "ADD_WORD", wordId, wordText };
