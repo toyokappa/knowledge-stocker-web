@@ -81,7 +81,6 @@ const KnowledgeSubmit = styled(Submit)`
 function mapStateToProps(state) {
   return {
     words: state.words,
-    knowledges: state.knowledges,
     nextId: state.nextId
   };
 }
