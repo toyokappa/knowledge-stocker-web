@@ -1,5 +1,7 @@
 import Copylight from "./Copylight";
 import EditButton from "./EditButton";
+import HelpIcon from "./HelpIcon";
+import HelpTooltip from "./HelpTooltip";
 import ListItem from "./ListItem";
 import Logo from "./Logo";
 import NavItem from "./NavItem";
@@ -15,6 +17,8 @@ import UrlField from "./UrlField";
 export {
   Copylight,
   EditButton,
+  HelpIcon,
+  HelpTooltip,
   ListItem,
   Logo,
   NavItem,

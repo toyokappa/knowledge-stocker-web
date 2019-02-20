@@ -12,5 +12,5 @@ export default function AveUnderstanding(props) {
   const filterdUnderstandings = _.compact(maxUnderstandings);
   const aveUnderstanding =
     filterdUnderstandings.length > 0 ? (_.sum(filterdUnderstandings) / filterdUnderstandings.length).toFixed(1) : "-";
-  return <Score label="平均理解度" value={aveUnderstanding} />;
+  return <Score label="平均理解度" value={aveUnderstanding} help="全単語の理解度の平均値" />;
 }
