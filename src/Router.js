@@ -1,10 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "./lib/PrivateRoute";
 import { ConnectedRouter } from "connected-react-router";
 
 import WordList from "./components/pages/WordList";
 import Word from "./components/pages/Word";
 import Achievement from "./components/pages/Achievement";
+import SignIn from "./components/pages/SignIn";
 
 export default function Router(props) {
   const { history } = props;
@@ -12,9 +14,10 @@ export default function Router(props) {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" component={WordList} />
-        <Route exact path="/words/:wordId" component={Word} />
-        <Route exact path="/achievements" component={Achievement} />
+        <PrivateRoute exact path="/" component={WordList} />
+        <PrivateRoute exact path="/words/:wordId" component={Word} />
+        <PrivateRoute exact path="/achievements" component={Achievement} />
+        <Route exact path="/sign_in" component={SignIn} />
       </Switch>
     </ConnectedRouter>
   );
