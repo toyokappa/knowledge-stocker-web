@@ -1,9 +1,21 @@
-import { authenticate } from "../apis/authApi";
+import { authenticateUser, signInUser } from "../apis/authApi";
 import search from "../apis/googleApi";
+
+export function authenticate(authToken) {
+  return dispatch => {
+    authenticateUser(authToken)
+      .then(() => {
+        dispatch({ type: "SIGN_IN" });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
 
 export function signIn(email, password) {
   return dispatch => {
-    authenticate(email, password).then(res => {
+    signInUser(email, password).then(res => {
       const { data } = res;
       const { authToken } = data;
       localStorage.setItem("authToken", authToken);
