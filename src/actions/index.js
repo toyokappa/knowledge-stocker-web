@@ -1,4 +1,16 @@
+import { authenticate } from "../apis/authApi";
 import search from "../apis/googleApi";
+
+export function signIn(email, password) {
+  return dispatch => {
+    authenticate(email, password).then(res => {
+      const { data } = res;
+      const { authToken } = data;
+      localStorage.setItem("authToken", authToken);
+      dispatch({ type: "SIGN_IN" });
+    });
+  };
+}
 
 export function addWord(wordId, wordText) {
   return { type: "ADD_WORD", wordId, wordText };

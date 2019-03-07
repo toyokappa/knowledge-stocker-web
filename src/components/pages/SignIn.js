@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";
 import { EmailField, PasswordField, Submit, Title } from "../atoms/Common";
+import { signIn } from "../../actions";
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
 
@@ -13,17 +16,50 @@ export default class SignIn extends Component {
       email: "",
       password: ""
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { signIn } = this.props;
+    const { email, password } = this.state;
+    if (email === "" || password === "") return;
+
+    signIn(email, password);
+    this.setState({ email: "", password: "" });
+  }
+
+  handleChangeInput(event) {
+    const { target } = event;
+    const { name, value } = target;
+    this.setState({ [name]: value });
   }
 
   render() {
-    return (
+    const { auth } = this.props;
+    const { email, password } = this.state;
+    return auth.isSignedIn ? (
+      <Redirect to="/" />
+    ) : (
       <BaseLayout>
         <SignInContainer>
-          <SignInForm>
+          <SignInForm onSubmit={this.handleSubmit}>
             <SignInIcon />
             <SignInTitle>ログイン</SignInTitle>
-            <SignInEmailField placeholder="メールアドレス" />
-            <SignInPasswordField placeholder="パスワード" />
+            <SignInEmailField
+              name="email"
+              value={email}
+              placeholder="メールアドレス"
+              onChange={this.handleChangeInput}
+            />
+            <SignInPasswordField
+              name="password"
+              value={password}
+              placeholder="パスワード"
+              onChange={this.handleChangeInput}
+            />
             <SignInSubmit value="ログイン" />
           </SignInForm>
         </SignInContainer>
@@ -76,3 +112,20 @@ const SignInSubmit = styled(Submit)`
   display: block;
   width: 100%;
 `;
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    signIn: (email, password) => dispatch(signIn(email, password))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);

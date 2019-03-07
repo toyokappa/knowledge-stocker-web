@@ -9,7 +9,7 @@ import rootReducer from "./reducers";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["filter"]
+  blacklist: ["auth", "filter"]
 };
 
 export default history => {
