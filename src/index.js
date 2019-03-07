@@ -2,7 +2,6 @@ import React from "react";
 import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
-import { PersistGate } from "redux-persist/integration/react";
 
 import configureStore from "./configureStore";
 import Router from "./Router";
@@ -12,15 +11,13 @@ import "font-awesome/css/font-awesome.min.css";
 import * as serviceWorker from "./serviceWorker";
 
 const history = createBrowserHistory();
-const { store, persistor } = configureStore(history);
+const { store } = configureStore(history);
 
 render(
   <>
     <BaseStyles />
     <Provider store={store}>
-      <PersistGate persistor={persistor} loading={null}>
-        <Router history={history} />
-      </PersistGate>
+      <Router history={history} />
     </Provider>
   </>,
   document.getElementById("root")
