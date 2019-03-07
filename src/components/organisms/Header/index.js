@@ -23,7 +23,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   width: 100%;
   background-color: gold;
-  padding: 20px 30px;
+  padding: 1rem 1.5rem;
   box-sizing: border-box;
 `;
 
