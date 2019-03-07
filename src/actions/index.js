@@ -12,6 +12,13 @@ export function signIn(email, password) {
   };
 }
 
+export function signOut() {
+  return dispatch => {
+    localStorage.removeItem("authToken");
+    dispatch({ type: "SIGN_OUT" });
+  };
+}
+
 export function addWord(wordId, wordText) {
   return { type: "ADD_WORD", wordId, wordText };
 }

@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import { Logo } from "../../atoms/Common";
-import HeaderNav from "../../molecules/HeaderNav";
+import { AuthNav, UnauthNav } from "../../molecules/HeaderNav";
 
-export default function Header() {
+function Header(props) {
+  const { auth } = props;
+
   return (
     <HeaderContainer>
       <LogoLink to="/">
         <Logo />
       </LogoLink>
-      <HeaderNav />
+      {auth.isSignedIn ? <AuthNav /> : <UnauthNav />}
     </HeaderContainer>
   );
 }
@@ -30,3 +33,14 @@ const HeaderContainer = styled.header`
 const LogoLink = styled(Link)`
   text-decoration: none;
 `;
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Header);
