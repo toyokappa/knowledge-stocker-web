@@ -12,7 +12,7 @@ class SignUp extends Component {
     super(props);
 
     this.state = {
-      username: "",
+      name: "",
       email: "",
       password: "",
       passwordConfirmation: ""
@@ -25,10 +25,10 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { signUp } = this.props;
-    const { username, email, password, passwordConfirmation } = this.state;
-    if (username === "" || email === "" || password === "" || passwordConfirmation === "") return;
+    const { name, email, password, passwordConfirmation } = this.state;
+    if (name === "" || email === "" || password === "" || passwordConfirmation === "") return;
 
-    signUp(username, email, password, passwordConfirmation);
+    signUp(name, email, password, passwordConfirmation);
     this.setState({ password: "", passwordConfirmation: "" });
   }
 
@@ -39,19 +39,14 @@ class SignUp extends Component {
   }
 
   render() {
-    const { username, email, password, passwordConfirmation } = this.state;
+    const { name, email, password, passwordConfirmation } = this.state;
     return (
       <BaseLayout>
         <SignUpContainer>
           <SignUpForm onSubmit={this.handleSubmit}>
             <SignUpIcon />
             <SignUpTitle>新規登録</SignUpTitle>
-            <SignUpTextField
-              name="username"
-              value={username}
-              placeholder="ユーザー名"
-              onChange={this.handleChangeInput}
-            />
+            <SignUpTextField name="name" value={name} placeholder="ユーザー名" onChange={this.handleChangeInput} />
             <SignUpEmailField
               name="email"
               value={email}
@@ -131,8 +126,8 @@ const SignUpSubmit = styled(Submit)`
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: (username, email, password, passwordConfirmation) =>
-      dispatch(signUp(username, email, password, passwordConfirmation))
+    signUp: (name, email, password, passwordConfirmation) =>
+      dispatch(signUp(name, email, password, passwordConfirmation))
   };
 }
 

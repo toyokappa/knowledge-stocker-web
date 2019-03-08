@@ -13,9 +13,9 @@ export function authenticate(authToken) {
   };
 }
 
-export function signUp(username, email, password, passwordConfirmation) {
+export function signUp(name, email, password, passwordConfirmation) {
   return dispatch => {
-    signUpUser(username, email, password, passwordConfirmation).then(() => {
+    signUpUser(name, email, password, passwordConfirmation).then(() => {
       dispatch(signIn(email, password));
     });
   };
