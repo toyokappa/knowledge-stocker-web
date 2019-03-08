@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
@@ -38,11 +37,8 @@ class SignIn extends Component {
   }
 
   render() {
-    const { auth } = this.props;
     const { email, password } = this.state;
-    return auth.isSignedIn ? (
-      <Redirect to="/" />
-    ) : (
+    return (
       <BaseLayout>
         <SignInContainer>
           <SignInForm onSubmit={this.handleSubmit}>
@@ -113,12 +109,6 @@ const SignInSubmit = styled(Submit)`
   width: 100%;
 `;
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     signIn: (email, password) => dispatch(signIn(email, password))
@@ -126,6 +116,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(SignIn);

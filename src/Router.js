@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import PrivateRoute from "./lib/PrivateRoute";
+import UnauthRoute from "./lib/UnauthRoute";
 import { ConnectedRouter } from "connected-react-router";
 
 import Auth from "./components/templates/Auth";
@@ -20,8 +21,8 @@ export default function Router(props) {
           <PrivateRoute exact path="/" component={WordList} />
           <PrivateRoute exact path="/words/:wordId" component={Word} />
           <PrivateRoute exact path="/achievements" component={Achievement} />
-          <Route exact path="/sign_up" component={SignUp} />
-          <Route exact path="/sign_in" component={SignIn} />
+          <UnauthRoute exact path="/sign_up" component={SignUp} />
+          <UnauthRoute exact path="/sign_in" component={SignIn} />
         </Switch>
       </Auth>
     </ConnectedRouter>
