@@ -1,4 +1,4 @@
-import { authenticateUser, signInUser } from "../apis/authApi";
+import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
 import search from "../apis/googleApi";
 
 export function authenticate(authToken) {
@@ -10,6 +10,14 @@ export function authenticate(authToken) {
       .catch(err => {
         console.log(err);
       });
+  };
+}
+
+export function signUp(username, email, password, passwordConfirmation) {
+  return dispatch => {
+    signUpUser(username, email, password, passwordConfirmation).then(() => {
+      dispatch(signIn(email, password));
+    });
   };
 }
 
