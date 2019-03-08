@@ -1,6 +1,5 @@
 import React from "react";
 import Circle from "react-circle";
-import Tooltip from "react-tooltip";
 import styled from "styled-components";
 
 import { HelpIcon } from "../../atoms/Common";
