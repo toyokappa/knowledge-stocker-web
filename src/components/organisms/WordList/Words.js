@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { lifecycle } from "recompose";
 import { connect } from "react-redux";
 
 import { EmptyState } from "../../atoms/WordList";
 import Word from "./Word";
+import { fetchUserWords } from "../../../actions";
 
 function Words(props) {
   const { wordIds, words } = props;
@@ -26,6 +28,13 @@ const WordList = styled.ul`
   margin: 0;
 `;
 
+const enhancedWords = lifecycle({
+  componentWillMount() {
+    const { user, fetchUserWords } = this.props;
+    fetchUserWords(user.name);
+  }
+})(Words);
+
 function filterWordIds(wordIds, words, filter) {
   switch (filter) {
     case "unknown":
@@ -41,12 +50,19 @@ function filterWordIds(wordIds, words, filter) {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     wordIds: filterWordIds(state.wordIds, state.words, state.filter),
     words: state.words
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchUserWords: userName => dispatch(fetchUserWords(userName))
+  };
+}
+
 export default connect(
   mapStateToProps,
-  null
-)(Words);
+  mapDispatchToProps
+)(enhancedWords);

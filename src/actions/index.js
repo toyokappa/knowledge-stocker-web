@@ -1,4 +1,5 @@
 import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
+import { getUserWords } from "../apis/mainApi";
 import search from "../apis/googleApi";
 
 export function authenticate(authToken) {
@@ -38,6 +39,20 @@ export function signOut() {
   return dispatch => {
     localStorage.removeItem("authToken");
     dispatch({ type: "SIGN_OUT" });
+  };
+}
+
+export function fetchUserWords(userName) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_USER_WORDS" });
+    getUserWords(userName)
+      .then(res => {
+        const words = res.data;
+        dispatch({ type: "SUCCESS_USER_WORDS", words });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_USER_WORDS", error });
+      });
   };
 }
 
