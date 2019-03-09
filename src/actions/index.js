@@ -4,8 +4,10 @@ import search from "../apis/googleApi";
 export function authenticate(authToken) {
   return dispatch => {
     authenticateUser(authToken)
-      .then(() => {
-        dispatch({ type: "SIGN_IN" });
+      .then(res => {
+        const { data } = res;
+        const { userName } = data;
+        dispatch({ type: "SUCCESS_SIGN_IN", userName });
       })
       .catch(err => {
         console.log(err);
@@ -25,9 +27,9 @@ export function signIn(email, password) {
   return dispatch => {
     signInUser(email, password).then(res => {
       const { data } = res;
-      const { authToken } = data;
+      const { authToken, userName } = data;
       localStorage.setItem("authToken", authToken);
-      dispatch({ type: "SIGN_IN" });
+      dispatch({ type: "SUCCESS_SIGN_IN", userName });
     });
   };
 }
