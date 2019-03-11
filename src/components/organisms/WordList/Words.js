@@ -9,7 +9,7 @@ import { fetchUserWords } from "../../../actions";
 
 function Words(props) {
   const { user } = props;
-  const wordList = user.words.reverse().map(word => {
+  const wordList = user.words.map(word => {
     return <Word word={word} key={word.id} />;
   });
 
