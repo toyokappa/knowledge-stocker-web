@@ -4,14 +4,14 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import { ListItem, RemoveButton } from "../../atoms/Common";
-import { removeWord } from "../../../actions";
+import { destroyUserWords } from "../../../actions";
 
 function Word(props) {
-  const { word, removeWord } = props;
+  const { user, word, destroyUserWords } = props;
   return (
     <WordListItem key={word.id}>
       <WordLink to={`/words/${word.id}`}>{word.text}</WordLink>
-      <RemoveButton onClick={() => removeWord(word.id, word.knowledges)} />
+      <RemoveButton onClick={() => destroyUserWords(user.name, word.id)} />
     </WordListItem>
   );
 }
@@ -30,13 +30,19 @@ const WordLink = styled(Link)`
   margin-right: auto;
 `;
 
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-    removeWord: (wordId, knowledgeIds) => dispatch(removeWord(wordId, knowledgeIds))
+    destroyUserWords: (userName, wordId) => dispatch(destroyUserWords(userName, wordId))
   };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Word);

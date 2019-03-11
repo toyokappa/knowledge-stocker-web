@@ -13,3 +13,8 @@ export function postUserWords(userName, wordText) {
   const path = `/users/${userName}/words`;
   return axios.post(path, { text: wordText });
 }
+
+export function deleteUserWords(userName, wordId) {
+  const path = `/users/${userName}/words/${wordId}`;
+  return axios.delete(path);
+}
