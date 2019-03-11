@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import { Submit, TextField } from "../../atoms/Common";
-import { addWord } from "../../../actions";
+import { createUserWords } from "../../../actions";
 
 class Form extends Component {
   constructor(props) {
@@ -18,12 +18,11 @@ class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { nextId } = this.props;
+    const { user, createUserWords } = this.props;
     const { wordText } = this.state;
     if (wordText === "") return;
 
-    const { addWord } = this.props;
-    addWord(nextId.wordId, wordText);
+    createUserWords(user.name, wordText);
     this.setState({ wordText: "" });
   }
 
@@ -62,13 +61,13 @@ const WordTextField = styled(TextField)`
 
 function mapStateToProps(state) {
   return {
-    nextId: state.nextId
+    user: state.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addWord: (wordId, wordText) => dispatch(addWord(wordId, wordText))
+    createUserWords: (userName, wordText) => dispatch(createUserWords(userName, wordText))
   };
 }
 

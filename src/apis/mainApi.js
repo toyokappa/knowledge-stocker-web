@@ -8,3 +8,8 @@ export function getUserWords(userName) {
   const path = `/users/${userName}/words`;
   return axios.get(path);
 }
+
+export function postUserWords(userName, wordText) {
+  const path = `/users/${userName}/words`;
+  return axios.post(path, { text: wordText });
+}
