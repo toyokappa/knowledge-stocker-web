@@ -8,8 +8,9 @@ import Word from "./Word";
 import { fetchUserWords } from "../../../actions";
 
 function Words(props) {
-  const { user } = props;
-  const wordList = user.words.map(word => {
+  const { user, filter } = props;
+  const filteredWords = filterWords(user.words, filter);
+  const wordList = filteredWords.map(word => {
     return <Word word={word} key={word.id} />;
   });
 
@@ -34,22 +35,23 @@ const enhancedWords = lifecycle({
   }
 })(Words);
 
-// function filterWordIds(wordIds, words, filter) {
-//   switch (filter) {
-//     case "unknown":
-//       return wordIds.filter(wordId => !words[wordId].understood);
-//     case "welknown":
-//       return wordIds.filter(wordId => words[wordId].understood);
-//     case "all":
-//       return wordIds;
-//     default:
-//       throw new Error("Unknown filter: " + filter);
-//   }
-// }
+function filterWords(words, filter) {
+  switch (filter) {
+    case "unknown":
+      return words.filter(word => !word.understood);
+    case "welknown":
+      return words.filter(word => word.understood);
+    case "all":
+      return words;
+    default:
+      throw new Error("Unknown filter: " + filter);
+  }
+}
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    filter: state.filter
   };
 }
 
