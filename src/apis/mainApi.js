@@ -9,6 +9,11 @@ export function getUserWords(userName) {
   return axios.get(path);
 }
 
+export function getWord(wordId) {
+  const path = `/words/${wordId}`;
+  return axios.get(path);
+}
+
 export function postUserWords(userName, wordText) {
   const path = `/users/${userName}/words`;
   return axios.post(path, { text: wordText });

@@ -1,5 +1,5 @@
 import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
-import { getUserWords, postUserWords, deleteUserWords } from "../apis/mainApi";
+import { getUserWords, postUserWords, deleteUserWords, getWord } from "../apis/mainApi";
 import search from "../apis/googleApi";
 
 export function authenticate(authToken) {
@@ -52,6 +52,20 @@ export function fetchUserWords(userName) {
       })
       .catch(error => {
         dispatch({ type: "FAILURE_USER_WORDS", error });
+      });
+  };
+}
+
+export function fetchWord(wordId) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_WORD" });
+    getWord(wordId)
+      .then(res => {
+        const word = res.data;
+        dispatch({ type: "SUCCESS_WORD", ...word });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_WORD", error });
       });
   };
 }

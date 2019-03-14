@@ -10,9 +10,7 @@ class WordText extends Component {
     super(props);
 
     this.editWordRef = React.createRef();
-    this.wordId = this.props.wordId;
-    const { words } = this.props;
-    const word = words[this.wordId];
+    const { word } = this.props;
     this.state = {
       wordText: word.text,
       isEditing: false
@@ -46,8 +44,7 @@ class WordText extends Component {
 
   render() {
     const { wordText, isEditing } = this.state;
-    const { words } = this.props;
-    const word = words[this.wordId];
+    const { word } = this.props;
 
     const editWordForm = (
       <EditWordForm
@@ -62,11 +59,6 @@ class WordText extends Component {
     return isEditing ? editWordForm : showWord;
   }
 }
-function mapStateToProps(state) {
-  return {
-    words: state.words
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -75,6 +67,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(WordText);

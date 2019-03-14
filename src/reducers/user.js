@@ -12,9 +12,11 @@ export default function user(state = initialState, action) {
     case "REQUEST_USER_WORDS":
       return { ...state, isFetching: true };
     case "SUCCESS_USER_WORDS":
-      return { ...state, words: action.words, isFetching: false };
+      const { words } = action;
+      return { ...state, words, isFetching: false };
     case "FAILURE_USER_WORDS":
-      return { ...state, isFetching: false, error: action.error };
+      const { error } = action;
+      return { ...state, isFetching: false, error };
     default:
       return state;
   }
