@@ -19,6 +19,11 @@ export function postUserWords(userName, wordText) {
   return axios.post(path, { text: wordText });
 }
 
+export function patchWord(wordId, wordText) {
+  const path = `/words/${wordId}`;
+  return axios.patch(path, { text: wordText });
+}
+
 export function deleteUserWords(userName, wordId) {
   const path = `/users/${userName}/words/${wordId}`;
   return axios.delete(path);

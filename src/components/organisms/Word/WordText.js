@@ -10,9 +10,8 @@ class WordText extends Component {
     super(props);
 
     this.editWordRef = React.createRef();
-    const { word } = this.props;
     this.state = {
-      wordText: word.text,
+      wordText: "",
       isEditing: false
     };
   }
@@ -23,16 +22,18 @@ class WordText extends Component {
   }
 
   handleClickEdit() {
-    this.setState({ isEditing: true });
+    const { word } = this.props;
+    this.setState({ wordText: word.text, isEditing: true });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { wordText } = this.state;
+    const { word } = this.props;
     if (wordText === "") return;
 
     const { updateWord } = this.props;
-    updateWord(this.wordId, wordText);
+    updateWord(word.id, wordText);
     this.setState({ isEditing: false });
   }
 

@@ -1,5 +1,5 @@
 import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
-import { getUserWords, postUserWords, deleteUserWords, getWord } from "../apis/mainApi";
+import { getUserWords, postUserWords, deleteUserWords, getWord, patchWord } from "../apis/mainApi";
 import search from "../apis/googleApi";
 
 export function authenticate(authToken) {
@@ -84,6 +84,20 @@ export function createUserWords(userName, wordText) {
   };
 }
 
+export function updateWord(wordId, wordText) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_WORD" });
+    patchWord(wordId, wordText)
+      .then(res => {
+        const word = res.data;
+        dispatch({ type: "SUCCESS_WORD", ...word });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_WORD", error });
+      });
+  };
+}
+
 export function destroyUserWords(userName, wordId) {
   return dispatch => {
     dispatch({ type: "REQUEST_USER_WORDS" });
@@ -100,10 +114,6 @@ export function destroyUserWords(userName, wordId) {
 
 export function addWord(wordId, wordText) {
   return { type: "ADD_WORD", wordId, wordText };
-}
-
-export function updateWord(wordId, wordText) {
-  return { type: "UPDATE_WORD", wordId, wordText };
 }
 
 export function removeWord(wordId, knowledgeIds) {
