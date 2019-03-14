@@ -112,14 +112,6 @@ export function destroyUserWords(userName, wordId) {
   };
 }
 
-export function addWord(wordId, wordText) {
-  return { type: "ADD_WORD", wordId, wordText };
-}
-
-export function removeWord(wordId, knowledgeIds) {
-  return { type: "REMOVE_WORD", wordId, knowledgeIds };
-}
-
 export function addKnowledge(knowledgeId, wordId, url, understanding) {
   return dispatch => {
     search(url).then(res => {
