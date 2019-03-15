@@ -5,11 +5,8 @@ import styled from "styled-components";
 import { HelpIcon } from "../../atoms/Common";
 
 export default function UnderstandingGraph(props) {
-  const { wordIds, understoodWordIds } = props;
-
-  // ワカッタ指数
-  const achievement = wordIds.length > 0 ? (understoodWordIds.length / wordIds.length) * 100 : 0;
-  const achievementSize = wordIds.length * 5 + 100;
+  const { wordLength, understoodRate } = props;
+  const achievementSize = wordLength * 5 + 100;
 
   return (
     <CircleContainer>
@@ -17,7 +14,7 @@ export default function UnderstandingGraph(props) {
         animate={true}
         animationDuration="1s"
         size={achievementSize}
-        progress={achievement.toFixed()}
+        progress={understoodRate}
         progressColor="gold"
         textColor="black"
         roundedStroke={true}

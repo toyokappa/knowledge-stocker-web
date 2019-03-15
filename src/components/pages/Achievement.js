@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { lifecycle } from "recompose";
 import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";
@@ -11,23 +12,24 @@ import {
   UnderstoodScore,
   UnknownScore
 } from "../organisms/Achievement";
+import { fetchUserAchievement } from "../../actions";
 
 function Achievement(props) {
-  const { wordIds, words, knowledges } = props;
-  const understoodWordIds = wordIds.filter(wordId => words[wordId].understood);
+  const { achievement } = props;
+  const { wordLength, understoodLength, understoodRate, knowledgeLength } = achievement;
 
   return (
     <BaseLayout>
       <Container>
         <div>
-          <UnderstandingGraph wordIds={wordIds} understoodWordIds={understoodWordIds} />
-          <ScoreContainer>
-            <UnknownScore wordIds={wordIds} understoodWordIds={understoodWordIds} />
-            <UnderstoodScore understoodWordIds={understoodWordIds} />
-            <AllScore wordIds={wordIds} />
-            <KnowledgeScore wordIds={wordIds} words={words} />
-            <AveUnderstanding wordIds={wordIds} words={words} knowledges={knowledges} />
-          </ScoreContainer>
+          <UnderstandingGraph wordLength={wordLength} understoodRate={understoodRate} />
+          {/* <ScoreContainer>
+            <UnknownScore wordLength={wordLength} understoodLength={understoodLength} />
+            <UnderstoodScore understoodLength={understoodLength} />
+            <AllScore wordLength={wordLength} />
+            <KnowledgeScore knowledgeLength={knowledgeLength} />
+            <AveUnderstanding />
+          </ScoreContainer> */}
         </div>
       </Container>
     </BaseLayout>
@@ -49,15 +51,27 @@ const ScoreContainer = styled.div`
   margin: 0 auto;
 `;
 
+const enhancedAchievement = lifecycle({
+  componentWillMount() {
+    const { user, fetchUserAchievement } = this.props;
+    fetchUserAchievement(user.name);
+  }
+})(Achievement);
+
 function mapStateToProps(state) {
   return {
-    wordIds: state.wordIds,
-    words: state.words,
-    knowledges: state.knowledges
+    user: state.user,
+    achievement: state.achievement
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchUserAchievement: userName => dispatch(fetchUserAchievement(userName))
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
-)(Achievement);
+  mapDispatchToProps
+)(enhancedAchievement);

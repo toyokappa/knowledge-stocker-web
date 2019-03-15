@@ -8,7 +8,8 @@ import {
   patchWord,
   postWordKnowledges,
   patchKnowledge,
-  deleteKnowledge
+  deleteKnowledge,
+  getUserAchievement
 } from "../apis/mainApi";
 
 export function authenticate(authToken) {
@@ -159,6 +160,20 @@ export function destroyWordKnowledges(knowledgeId) {
       })
       .catch(error => {
         dispatch({ type: "FAILURE_WORD_KNOWLEDGES", error });
+      });
+  };
+}
+
+export function fetchUserAchievement(userName) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_ACHIEVEMENT" });
+    getUserAchievement(userName)
+      .then(res => {
+        const achievement = res.data;
+        dispatch({ type: "SUCCESS_ACHIEVEMENT", ...achievement });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_ACHIEVEMENT", error });
       });
   };
 }

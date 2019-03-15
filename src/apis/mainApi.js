@@ -43,3 +43,8 @@ export function deleteKnowledge(knowledgeId) {
   const path = `/knowledges/${knowledgeId}`;
   return axios.delete(path);
 }
+
+export function getUserAchievement(userName) {
+  const path = `/users/${userName}/achievement`;
+  return axios.get(path);
+}
