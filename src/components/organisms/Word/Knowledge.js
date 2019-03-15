@@ -4,30 +4,30 @@ import { connect } from "react-redux";
 
 import { ListItem } from "../../atoms/Common";
 import { EditKnowledgeForm, ShowKnowledge } from "../../molecules/Word";
-import { updateKnowledge, removeKnowledge } from "../../../actions";
+import { removeKnowledge, updateWordKnowledges } from "../../../actions";
 
 class Knowledge extends Component {
   constructor(props) {
     super(props);
-    const { knowledge } = this.props;
     this.state = {
-      isEditing: false,
-      url: knowledge.url,
-      understanding: knowledge.understanding
+      url: "",
+      understanding: null,
+      isEditing: false
     };
   }
 
   handleClickEdit() {
-    this.setState({ isEditing: true });
+    const { knowledge } = this.props;
+    this.setState({ url: knowledge.url, understanding: knowledge.understanding, isEditing: true });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { knowledge, updateKnowledge } = this.props;
+    const { knowledge, updateWordKnowledges } = this.props;
     const { url, understanding } = this.state;
     if (url === "" || understanding === null) return;
 
-    updateKnowledge(knowledge.id, url, understanding);
+    updateWordKnowledges(knowledge.id, url, understanding);
     this.setState({ isEditing: false });
   }
 
@@ -70,7 +70,8 @@ const KnowledgeListItem = styled(ListItem)`
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateKnowledge: (knowledgeId, url, understanding) => dispatch(updateKnowledge(knowledgeId, url, understanding)),
+    updateWordKnowledges: (knowledgeId, url, understanding) =>
+      dispatch(updateWordKnowledges(knowledgeId, url, understanding)),
     removeKnowledge: (wordId, knowledgeId) => dispatch(removeKnowledge(wordId, knowledgeId))
   };
 }

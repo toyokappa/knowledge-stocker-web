@@ -1,6 +1,14 @@
 import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
 import search from "../apis/googleApi";
-import { getUserWords, postUserWords, deleteUserWords, getWord, patchWord, postWordKnowledges } from "../apis/mainApi";
+import {
+  getUserWords,
+  postUserWords,
+  deleteUserWords,
+  getWord,
+  patchWord,
+  postWordKnowledges,
+  patchKnowledge
+} from "../apis/mainApi";
 
 export function authenticate(authToken) {
   return dispatch => {
@@ -116,6 +124,20 @@ export function createWordKnowledges(wordId, url, understanding) {
   return dispatch => {
     dispatch({ type: "REQUEST_WORD_KNOWLEDGES" });
     postWordKnowledges(wordId, url, understanding)
+      .then(res => {
+        const knowledges = res.data;
+        dispatch({ type: "SUCCESS_WORD_KNOWLEDGES", knowledges });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_WORD_KNOWLEDGES", error });
+      });
+  };
+}
+
+export function updateWordKnowledges(knowledgeId, url, understanding) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_WORD_KNOWLEDGES" });
+    patchKnowledge(knowledgeId, url, understanding)
       .then(res => {
         const knowledges = res.data;
         dispatch({ type: "SUCCESS_WORD_KNOWLEDGES", knowledges });

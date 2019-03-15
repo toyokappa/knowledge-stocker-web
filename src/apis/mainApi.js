@@ -33,3 +33,8 @@ export function postWordKnowledges(wordId, url, understanding) {
   const path = `/words/${wordId}/knowledges`;
   return axios.post(path, { url, understanding });
 }
+
+export function patchKnowledge(knowledgeId, url, understanding) {
+  const path = `/knowledges/${knowledgeId}`;
+  return axios.patch(path, { url, understanding });
+}

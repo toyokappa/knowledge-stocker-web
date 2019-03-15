@@ -8,7 +8,7 @@ export default function EditKnowledgeForm(props) {
   const { url, understanding, onSubmit, onChange, onClick } = props;
   return (
     <form onSubmit={onSubmit}>
-      <KnowledgeUrlField name="knowledgeUrl" placeholder="URL" value={url} onChange={onChange} />
+      <KnowledgeUrlField name="url" placeholder="URL" value={url} onChange={onChange} />
       <KnowledgeRating
         emptySymbol="fa fa-star-o fa-2x"
         fullSymbol="fa fa-star fa-2x"
