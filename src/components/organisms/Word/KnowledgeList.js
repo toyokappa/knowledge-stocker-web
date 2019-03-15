@@ -6,11 +6,7 @@ import Knowledge from "./Knowledge";
 
 export default function KnowledgeList(props) {
   const { knowledges } = props;
-  const sortedKnowledgeIds = knowledges.reverse().sort((fkId, skId) => {
-    return knowledges[skId].understanding - knowledges[fkId].understanding;
-  });
-  const knowledgeList = sortedKnowledgeIds.map(knowledgeId => {
-    const knowledge = knowledges[knowledgeId];
+  const knowledgeList = knowledges.map(knowledge => {
     return <Knowledge key={knowledge.id} knowledge={knowledge} />;
   });
 

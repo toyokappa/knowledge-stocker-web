@@ -28,3 +28,8 @@ export function deleteUserWords(userName, wordId) {
   const path = `/users/${userName}/words/${wordId}`;
   return axios.delete(path);
 }
+
+export function postWordKnowledges(wordId, url, understanding) {
+  const path = `/words/${wordId}/knowledges`;
+  return axios.post(path, { url, understanding });
+}

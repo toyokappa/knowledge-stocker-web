@@ -14,7 +14,7 @@ function Word(props) {
   return (
     <BaseLayout>
       <WordText word={word} />
-      <Form word={word} />
+      <Form wordId={word.id} />
       <KnowledgeList knowledges={word.knowledges} />
     </BaseLayout>
   );
