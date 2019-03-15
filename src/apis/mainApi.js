@@ -38,3 +38,8 @@ export function patchKnowledge(knowledgeId, url, understanding) {
   const path = `/knowledges/${knowledgeId}`;
   return axios.patch(path, { url, understanding });
 }
+
+export function deleteKnowledge(knowledgeId) {
+  const path = `/knowledges/${knowledgeId}`;
+  return axios.delete(path);
+}

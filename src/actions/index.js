@@ -7,7 +7,8 @@ import {
   getWord,
   patchWord,
   postWordKnowledges,
-  patchKnowledge
+  patchKnowledge,
+  deleteKnowledge
 } from "../apis/mainApi";
 
 export function authenticate(authToken) {
@@ -161,6 +162,20 @@ export function updateKnowledge(knowledgeId, url, understanding) {
         understanding
       });
     });
+  };
+}
+
+export function destroyWordKnowledges(knowledgeId) {
+  return dispatch => {
+    dispatch({ type: "REQUEST_WORD_KNOWLEDGES" });
+    deleteKnowledge(knowledgeId)
+      .then(res => {
+        const knowledges = res.data;
+        dispatch({ type: "SUCCESS_WORD_KNOWLEDGES", knowledges });
+      })
+      .catch(error => {
+        dispatch({ type: "FAILURE_WORD_KNOWLEDGES", error });
+      });
   };
 }
 

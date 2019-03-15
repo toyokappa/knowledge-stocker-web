@@ -4,21 +4,21 @@ import { connect } from "react-redux";
 
 import { ListItem } from "../../atoms/Common";
 import { EditKnowledgeForm, ShowKnowledge } from "../../molecules/Word";
-import { removeKnowledge, updateWordKnowledges } from "../../../actions";
+import { updateWordKnowledges, destroyWordKnowledges } from "../../../actions";
 
 class Knowledge extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isEditing: false,
       url: "",
-      understanding: null,
-      isEditing: false
+      understanding: null
     };
   }
 
   handleClickEdit() {
     const { knowledge } = this.props;
-    this.setState({ url: knowledge.url, understanding: knowledge.understanding, isEditing: true });
+    this.setState({ isEditing: true, url: knowledge.url, understanding: knowledge.understanding });
   }
 
   handleSubmit(event) {
@@ -42,7 +42,7 @@ class Knowledge extends Component {
   }
 
   render() {
-    const { wordId, knowledge, removeKnowledge } = this.props;
+    const { knowledge, destroyWordKnowledges } = this.props;
     const { isEditing, url, understanding } = this.state;
     const editKnowledgeForm = (
       <EditKnowledgeForm
@@ -57,7 +57,7 @@ class Knowledge extends Component {
       <ShowKnowledge
         knowledge={knowledge}
         showEditForm={this.handleClickEdit.bind(this)}
-        removeKnowledge={() => removeKnowledge(wordId, knowledge.id)}
+        removeKnowledge={() => destroyWordKnowledges(knowledge.id)}
       />
     );
     return <KnowledgeListItem>{isEditing ? editKnowledgeForm : showKnowledge}</KnowledgeListItem>;
@@ -72,7 +72,7 @@ function mapDispatchToProps(dispatch) {
   return {
     updateWordKnowledges: (knowledgeId, url, understanding) =>
       dispatch(updateWordKnowledges(knowledgeId, url, understanding)),
-    removeKnowledge: (wordId, knowledgeId) => dispatch(removeKnowledge(wordId, knowledgeId))
+    destroyWordKnowledges: knowledgeId => dispatch(destroyWordKnowledges(knowledgeId))
   };
 }
 
