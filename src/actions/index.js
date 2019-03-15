@@ -1,5 +1,5 @@
+// TODO: メソッド名の一貫性がないので整理する
 import { authenticateUser, signUpUser, signInUser } from "../apis/authApi";
-import search from "../apis/googleApi";
 import {
   getUserWords,
   postUserWords,
@@ -149,22 +149,6 @@ export function updateWordKnowledges(knowledgeId, url, understanding) {
   };
 }
 
-export function updateKnowledge(knowledgeId, url, understanding) {
-  return dispatch => {
-    search(url).then(res => {
-      const { data } = res;
-      const { title } = data.items[0];
-      dispatch({
-        type: "UPDATE_KNOWLEDGE",
-        knowledgeId,
-        url,
-        title,
-        understanding
-      });
-    });
-  };
-}
-
 export function destroyWordKnowledges(knowledgeId) {
   return dispatch => {
     dispatch({ type: "REQUEST_WORD_KNOWLEDGES" });
@@ -177,10 +161,6 @@ export function destroyWordKnowledges(knowledgeId) {
         dispatch({ type: "FAILURE_WORD_KNOWLEDGES", error });
       });
   };
-}
-
-export function removeKnowledge(wordId, knowledgeId) {
-  return { type: "REMOVE_KNOWLEDGE", wordId, knowledgeId };
 }
 
 export function setFilter(filter) {
