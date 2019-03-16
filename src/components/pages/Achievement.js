@@ -16,20 +16,20 @@ import { fetchUserAchievement } from "../../actions";
 
 function Achievement(props) {
   const { achievement } = props;
-  const { wordLength, understoodLength, understoodRate, knowledgeLength } = achievement;
+  const { wordLength, understoodLength, understoodRate, knowledgeLength, aveUnderstanding } = achievement;
 
   return (
     <BaseLayout>
       <Container>
         <div>
           <UnderstandingGraph wordLength={wordLength} understoodRate={understoodRate} />
-          {/* <ScoreContainer>
+          <ScoreContainer>
             <UnknownScore wordLength={wordLength} understoodLength={understoodLength} />
             <UnderstoodScore understoodLength={understoodLength} />
             <AllScore wordLength={wordLength} />
             <KnowledgeScore knowledgeLength={knowledgeLength} />
-            <AveUnderstanding />
-          </ScoreContainer> */}
+            <AveUnderstanding aveUnderstanding={aveUnderstanding} />
+          </ScoreContainer>
         </div>
       </Container>
     </BaseLayout>
