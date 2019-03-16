@@ -15,7 +15,7 @@ export default function ShowKnowledge(props) {
           emptySymbol="fa fa-star-o"
           fullSymbol="fa fa-star"
           fractions={2}
-          initialRating={knowledge.understanding}
+          initialRating={parseFloat(knowledge.understanding)}
           readonly
         />
       </KnowledgeLink>
