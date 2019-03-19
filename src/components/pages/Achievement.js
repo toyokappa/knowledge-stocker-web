@@ -12,7 +12,7 @@ import {
   UnderstoodScore,
   UnknownScore
 } from "../organisms/Achievement";
-import { fetchUserAchievement } from "../../actions";
+import { showAchievement } from "../../actions";
 
 function Achievement(props) {
   const { achievement } = props;
@@ -53,8 +53,8 @@ const ScoreContainer = styled.div`
 
 const enhancedAchievement = lifecycle({
   componentWillMount() {
-    const { user, fetchUserAchievement } = this.props;
-    fetchUserAchievement(user.name);
+    const { user, showAchievement } = this.props;
+    showAchievement(user.name);
   }
 })(Achievement);
 
@@ -67,7 +67,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchUserAchievement: userName => dispatch(fetchUserAchievement(userName))
+    showAchievement: userName => dispatch(showAchievement(userName))
   };
 }
 

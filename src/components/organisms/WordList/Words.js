@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { EmptyState } from "../../atoms/WordList";
 import Word from "./Word";
-import { fetchUserWords } from "../../../actions";
+import { indexWords } from "../../../actions";
 
 function Words(props) {
   const { user, filter } = props;
@@ -30,8 +30,8 @@ const WordList = styled.ul`
 
 const enhancedWords = lifecycle({
   componentWillMount() {
-    const { user, fetchUserWords } = this.props;
-    fetchUserWords(user.name);
+    const { user, indexWords } = this.props;
+    indexWords(user.name);
   }
 })(Words);
 
@@ -57,7 +57,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchUserWords: userName => dispatch(fetchUserWords(userName))
+    indexWords: userName => dispatch(indexWords(userName))
   };
 }
 

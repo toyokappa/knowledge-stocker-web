@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import { Submit, UrlField } from "../../atoms/Common";
-import { createWordKnowledges } from "../../../actions";
+import { createKnowledge } from "../../../actions";
 
 class Form extends Component {
   constructor(props) {
@@ -21,8 +21,8 @@ class Form extends Component {
     const { url, understanding } = this.state;
     if (url === "" || understanding === null) return;
 
-    const { wordId, createWordKnowledges } = this.props;
-    createWordKnowledges(wordId, url, understanding);
+    const { wordId, createKnowledge } = this.props;
+    createKnowledge(wordId, url, understanding);
     this.setState({ url: "", understanding: null });
   }
 
@@ -80,7 +80,7 @@ const KnowledgeSubmit = styled(Submit)`
 
 function mapDispatchToProps(dispatch) {
   return {
-    createWordKnowledges: (wordId, url, understanding) => dispatch(createWordKnowledges(wordId, url, understanding))
+    createKnowledge: (wordId, url, understanding) => dispatch(createKnowledge(wordId, url, understanding))
   };
 }
 

@@ -1,18 +1,27 @@
-import axios from "axios";
+const baseURL = "http://localhost:3000/api/v1";
+const contentJson = { "Content-Type": "application/json" };
 
-axios.defaults.baseURL = "http://localhost:3000/api/v1";
-
-export function authenticateUser(authToken) {
-  const path = "/sign_in";
-  return axios.get(path, { headers: { Authorization: `Bearer ${authToken}` } });
+export function authenticate(authToken) {
+  const path = `${baseURL}/sign_in`;
+  return fetch(path, { headers: { Authorization: `Bearer ${authToken}` } });
 }
 
-export function signUpUser(name, email, password, passwordConfirmation) {
-  const path = "/sign_up";
-  return axios.post(path, { name, email, password, password_confirmation: passwordConfirmation });
+export function signUp(name, email, password, passwordConfirmation) {
+  const path = `${baseURL}/sign_in`;
+  const params = { name, email, password, password_confirmation: passwordConfirmation };
+  return fetch(path, {
+    method: "POST",
+    headers: contentJson,
+    body: JSON.stringify(params)
+  });
 }
 
-export function signInUser(email, password) {
-  const path = "/sign_in";
-  return axios.post(path, { email, password });
+export function signIn(email, password) {
+  const path = `${baseURL}/sign_in`;
+  const params = { email, password };
+  return fetch(path, {
+    method: "POST",
+    headers: contentJson,
+    body: JSON.stringify(params)
+  });
 }

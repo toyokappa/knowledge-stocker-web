@@ -1,50 +1,75 @@
-import axios from "axios";
-
+const baseURL = "http://localhost:3000/api/v1";
 const authToken = localStorage.getItem("authToken");
-axios.defaults.baseURL = "http://localhost:3000/api/v1";
-axios.defaults.headers.common["Authorization"] = `Bearer ${authToken}`;
+const authorization = { Authorization: `Bearer ${authToken}` };
+const contentJson = { "Content-Type": "application/json" };
 
 export function getUserWords(userName) {
-  const path = `/users/${userName}/words`;
-  return axios.get(path);
+  const path = `${baseURL}/users/${userName}/words`;
+  return fetch(path, { headers: authorization });
 }
 
 export function getWord(wordId) {
-  const path = `/words/${wordId}`;
-  return axios.get(path);
+  const path = `${baseURL}/words/${wordId}`;
+  return fetch(path, { headers: authorization });
 }
 
 export function postUserWords(userName, wordText) {
-  const path = `/users/${userName}/words`;
-  return axios.post(path, { text: wordText });
+  const path = `${baseURL}/users/${userName}/words`;
+  const params = { text: wordText };
+  return fetch(path, {
+    method: "POST",
+    body: JSON.stringify(params),
+    headers: { ...authorization, ...contentJson }
+  });
 }
 
 export function patchWord(wordId, wordText) {
-  const path = `/words/${wordId}`;
-  return axios.patch(path, { text: wordText });
+  const path = `${baseURL}/words/${wordId}`;
+  const params = { text: wordText };
+  return fetch(path, {
+    method: "PATCH",
+    body: JSON.stringify(params),
+    headers: { ...authorization, ...contentJson }
+  });
 }
 
 export function deleteUserWords(userName, wordId) {
-  const path = `/users/${userName}/words/${wordId}`;
-  return axios.delete(path);
+  const path = `${baseURL}/users/${userName}/words/${wordId}`;
+  return fetch(path, {
+    method: "DELETE",
+    headers: authorization
+  });
 }
 
 export function postWordKnowledges(wordId, url, understanding) {
-  const path = `/words/${wordId}/knowledges`;
-  return axios.post(path, { url, understanding });
+  const path = `${baseURL}/words/${wordId}/knowledges`;
+  const params = { url, understanding };
+  return fetch(path, {
+    method: "POST",
+    body: JSON.stringify(params),
+    headers: { ...authorization, ...contentJson }
+  });
 }
 
 export function patchKnowledge(knowledgeId, url, understanding) {
-  const path = `/knowledges/${knowledgeId}`;
-  return axios.patch(path, { url, understanding });
+  const path = `${baseURL}/knowledges/${knowledgeId}`;
+  const params = { url, understanding };
+  return fetch(path, {
+    method: "PATCH",
+    body: JSON.stringify(params),
+    headers: { ...authorization, ...contentJson }
+  });
 }
 
 export function deleteKnowledge(knowledgeId) {
-  const path = `/knowledges/${knowledgeId}`;
-  return axios.delete(path);
+  const path = `${baseURL}/knowledges/${knowledgeId}`;
+  return fetch(path, {
+    method: "DELETE",
+    headers: authorization
+  });
 }
 
 export function getUserAchievement(userName) {
-  const path = `/users/${userName}/achievement`;
-  return axios.get(path);
+  const path = `${baseURL}/users/${userName}/achievement`;
+  return fetch(path, { headers: authorization });
 }

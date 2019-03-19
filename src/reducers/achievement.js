@@ -1,3 +1,5 @@
+import * as types from "../constants/ActionTypes";
+
 const initialState = {
   wordLength: null,
   understoodLength: null,
@@ -11,9 +13,9 @@ const initialState = {
 export default function achievement(state = initialState, action) {
   const { type, wordLength, understoodLength, understoodRate, knowledgeLength, aveUnderstanding, error } = action;
   switch (type) {
-    case "REQUEST_ACHIEVEMENT":
+    case types.REQUEST_ACHIEVEMENT:
       return { ...state, isFetching: true };
-    case "SUCCESS_ACHIEVEMENT":
+    case types.SUCCESS_ACHIEVEMENT:
       return {
         ...state,
         wordLength,
@@ -23,7 +25,7 @@ export default function achievement(state = initialState, action) {
         aveUnderstanding,
         isFetching: false
       };
-    case "FAILURE_ACHIEVEMENT":
+    case types.FAILURE_ACHIEVEMENT:
       return { ...state, isFetching: false, error };
     default:
       return state;

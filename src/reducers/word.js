@@ -1,3 +1,5 @@
+import * as types from "../constants/ActionTypes";
+
 const initialState = {
   id: null,
   text: "",
@@ -7,20 +9,20 @@ const initialState = {
 };
 
 export default function word(state = initialState, action) {
-  const { id, text, knowledges, error } = action;
+  const { type, id, text, knowledges, error } = action;
 
-  switch (action.type) {
-    case "REQUEST_WORD":
+  switch (type) {
+    case types.REQUEST_WORD:
       return { ...state, isFetching: true };
-    case "SUCCESS_WORD":
+    case types.SUCCESS_WORD:
       return { ...state, id, text, knowledges, isFetching: false };
-    case "FAILURE_WORD":
+    case types.FAILURE_WORD:
       return { ...state, isFetching: false, error };
-    case "REQUEST_WORD_KNOWLEDGES":
+    case types.REQUEST_KNOWLEDGES:
       return { ...state, isFetching: true };
-    case "SUCCESS_WORD_KNOWLEDGES":
+    case types.SUCCESS_KNOWLEDGES:
       return { ...state, knowledges, isFetching: false };
-    case "FAILURE_WORD_KNOWLEDGES":
+    case types.FAILURE_KNOWLEDGES:
       return { ...state, isFetching: false, error };
     default:
       return state;

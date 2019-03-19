@@ -1,3 +1,5 @@
+import * as types from "../constants/ActionTypes";
+
 const initialState = {
   name: "",
   words: [],
@@ -6,16 +8,15 @@ const initialState = {
 };
 
 export default function user(state = initialState, action) {
-  switch (action.type) {
-    case "SUCCESS_SIGN_IN":
-      return { ...state, name: action.userName };
-    case "REQUEST_USER_WORDS":
+  const { type, userName, words, error } = action;
+  switch (type) {
+    case types.SUCCESS_SIGN_IN:
+      return { ...state, name: userName };
+    case types.REQUEST_WORDS:
       return { ...state, isFetching: true };
-    case "SUCCESS_USER_WORDS":
-      const { words } = action;
+    case types.SUCCESS_WORDS:
       return { ...state, words, isFetching: false };
-    case "FAILURE_USER_WORDS":
-      const { error } = action;
+    case types.FAILURE_WORDS:
       return { ...state, isFetching: false, error };
     default:
       return state;

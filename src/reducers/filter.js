@@ -1,9 +1,12 @@
+import * as types from "../constants/ActionTypes";
+
 const initialState = "unknown";
 
 export default function filter(state = initialState, action) {
-  switch (action.type) {
-    case "SET_FILTER":
-      return action.filter;
+  const { type, filter } = action;
+  switch (type) {
+    case types.SET_FILTER:
+      return filter;
     default:
       return state;
   }

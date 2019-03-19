@@ -6,7 +6,7 @@ import BaseLayout from "../templates/BaseLayout";
 import WordText from "../organisms/Word/WordText";
 import Form from "../organisms/Word/Form";
 import KnowledgeList from "../organisms/Word/KnowledgeList";
-import { fetchWord } from "../../actions";
+import { showWord } from "../../actions";
 
 function Word(props) {
   const { word } = props;
@@ -22,9 +22,9 @@ function Word(props) {
 
 const enhancedWord = lifecycle({
   componentWillMount() {
-    const { match, fetchWord } = this.props;
+    const { match, showWord } = this.props;
     const { wordId } = match.params;
-    fetchWord(wordId);
+    showWord(wordId);
   }
 })(Word);
 
@@ -36,7 +36,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchWord: wordId => dispatch(fetchWord(wordId))
+    showWord: wordId => dispatch(showWord(wordId))
   };
 }
 
