@@ -15,6 +15,12 @@ export default function auth(state = initialState, action) {
       return { ...state, isSignedIn: true, isFetching: false };
     case types.FAILURE_SIGN_IN:
       return { ...state, isSignedIn: false, isFetching: false, error };
+    case types.REQUEST_SIGN_UP:
+      return { ...state, isFetching: true };
+    case types.SUCCESS_SIGN_UP:
+      return { ...state, isSignedIn: true, isFetching: false };
+    case types.FAILURE_SIGN_UP:
+      return { ...state, isSignedIn: false, isFetching: false, error };
     case types.SUCCESS_SIGN_OUT:
       return { isSignedIn: false };
     default:

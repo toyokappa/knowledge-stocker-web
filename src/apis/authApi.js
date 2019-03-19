@@ -7,7 +7,7 @@ export function authenticate(authToken) {
 }
 
 export function signUp(name, email, password, passwordConfirmation) {
-  const path = `${baseURL}/sign_in`;
+  const path = `${baseURL}/sign_up`;
   const params = { name, email, password, password_confirmation: passwordConfirmation };
   return fetch(path, {
     method: "POST",

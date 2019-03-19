@@ -14,10 +14,14 @@ export function authenticate(authToken) {
 }
 
 export function signUp(name, email, password, passwordConfirmation) {
-  return dispatch => {
-    authApi.signUp(name, email, password, passwordConfirmation).then(() => {
-      dispatch(signIn(email, password));
-    });
+  return async dispatch => {
+    dispatch(sync.requestSignUp());
+    const res = await authApi.signUp(name, email, password, passwordConfirmation);
+    if (res.status !== 200) return dispatch(sync.failureSignUp(res.statusText));
+
+    const { authToken, userName } = await res.json();
+    localStorage.setItem("authToken", authToken);
+    dispatch(sync.successSignUp(userName));
   };
 }
 
