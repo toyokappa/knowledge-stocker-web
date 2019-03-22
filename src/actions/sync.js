@@ -64,6 +64,16 @@ export function failureAchievement(error) {
   return { type: types.FAILURE_ACHIEVEMENT, error };
 }
 
+export function requestRanking() {
+  return { type: types.REQUEST_RANKING };
+}
+export function successRanking(ranking) {
+  return { type: types.SUCCESS_RANKING, ...ranking };
+}
+export function failureRanking(error) {
+  return { type: types.FAILURE_RANKING, error };
+}
+
 export function setFilter(filter) {
   return { type: types.SET_FILTER, filter };
 }

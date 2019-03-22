@@ -142,3 +142,15 @@ export function showAchievement(userName) {
     dispatch(sync.successAchievement(achievement));
   };
 }
+
+export function showRanking(term) {
+  return async dispatch => {
+    dispatch(sync.requestRanking());
+    const res = await mainApi.getRanking(term);
+    if (res.status !== 200) return dispatch(sync.failureRanking(res.statusText));
+
+    const ranking = await res.json();
+    console.log(ranking);
+    dispatch(sync.successRanking(ranking));
+  };
+}

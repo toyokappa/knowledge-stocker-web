@@ -73,3 +73,8 @@ export function getUserAchievement(userName) {
   const path = `${baseURL}/users/${userName}/achievement`;
   return fetch(path, { headers: authorization });
 }
+
+export function getRanking(term) {
+  const path = `${baseURL}/ranking?term=${term}`;
+  return fetch(path, { headers: authorization });
+}

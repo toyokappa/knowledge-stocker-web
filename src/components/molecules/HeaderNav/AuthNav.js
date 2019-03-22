@@ -14,7 +14,10 @@ function AuthNav(props) {
         <NavLink to="/">ホーム</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="/achievements">成績</NavLink>
+        <NavLink to="/achievement">成績</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/ranking">ランキング</NavLink>
       </NavItem>
       <NavItem>
         <SignOut onClick={() => signOut()}>ログアウト</SignOut>
