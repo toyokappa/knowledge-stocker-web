@@ -45,9 +45,45 @@ function Ranking(props) {
             <RankingUserName>対象のユーザーがいません</RankingUserName>
           </RankingItem>
         )}
+        {ranking.currentUser ? currentUserRanking(ranking.currentUser) : null}
       </RankingContainer>
     </BaseLayout>
   );
+}
+
+function currentUserRanking(currentUser) {
+  const { rank, name, score } = currentUser;
+  switch (true) {
+    case rank === 6:
+      return (
+        <RankingItem>
+          <RankingCrown>
+            <ShieldIcon />
+            <Rank>{rank}</Rank>
+          </RankingCrown>
+          <RankingUserName>{name}</RankingUserName>
+          <RankingScore>{score}pt</RankingScore>
+        </RankingItem>
+      );
+    case rank >= 7:
+      return (
+        <>
+          <RankingItem>
+            <RankingUserName>・・・</RankingUserName>
+          </RankingItem>
+          <RankingItem>
+            <RankingCrown>
+              <ShieldIcon />
+              <Rank>{rank}</Rank>
+            </RankingCrown>
+            <RankingUserName>{name}</RankingUserName>
+            <RankingScore>{score}pt</RankingScore>
+          </RankingItem>
+        </>
+      );
+    default:
+      return null;
+  }
 }
 
 const RankingTitle = styled(Title)`
