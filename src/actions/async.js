@@ -150,7 +150,6 @@ export function showRanking(term) {
     if (res.status !== 200) return dispatch(sync.failureRanking(res.statusText));
 
     const ranking = await res.json();
-    console.log(ranking);
     dispatch(sync.successRanking(ranking));
   };
 }

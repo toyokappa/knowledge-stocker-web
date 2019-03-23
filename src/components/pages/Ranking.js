@@ -1,19 +1,19 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { lifecycle } from "recompose";
+import { lifecycle, compose, withState, withHandlers } from "recompose";
 import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";
 import { showRanking } from "../../actions";
-import { ListItem, Title } from "../atoms/Common";
+import { ListItem, Title, TabItem } from "../atoms/Common";
 
 function Ranking(props) {
-  const { ranking } = props;
+  const { ranking, term, fetchRanking } = props;
   const userList = ranking.users.map((user, index) => {
     const rank = index + 1;
     return (
-      <RankingItem>
+      <RankingItem key={rank}>
         <RankingCrown>
           {rank < 4 ? <CrownIcon rank={rank} /> : <ShieldIcon />}
           <Rank>{rank}</Rank>
@@ -26,14 +26,39 @@ function Ranking(props) {
   return (
     <BaseLayout>
       <RankingTitle>ワカッタ!!ランキング</RankingTitle>
-      <RankingContainer>{userList}</RankingContainer>
+      <TabMenu>
+        <TabItem isActive={term === "monthly"} onClick={() => fetchRanking("monthly")}>
+          マンスリー
+        </TabItem>
+        <TabItem isActive={term === "weekly"} onClick={() => fetchRanking("weekly")}>
+          ウィークリー
+        </TabItem>
+        <TabItem isActive={term === "daily"} onClick={() => fetchRanking("daily")}>
+          デイリー
+        </TabItem>
+      </TabMenu>
+      <RankingContainer>
+        {userList.length > 0 ? (
+          userList
+        ) : (
+          <RankingItem>
+            <RankingUserName>対象のユーザーがいません</RankingUserName>
+          </RankingItem>
+        )}
+      </RankingContainer>
     </BaseLayout>
   );
 }
 
 const RankingTitle = styled(Title)`
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+`;
+
+const TabMenu = styled.ul`
+  max-width: 500px;
+  padding: 0;
+  margin: 0 auto;
 `;
 
 const RankingContainer = styled.ul`
@@ -104,12 +129,23 @@ const RankingScore = styled.div`
   font-weight: bold;
 `;
 
-const enhancedRanking = lifecycle({
-  componentWillMount() {
-    const { showRanking } = this.props;
-    showRanking("monthly");
-  }
-})(Ranking);
+const enhancer = compose(
+  withState("term", "setTerm", "monthly"),
+  withHandlers({
+    fetchRanking: ({ showRanking, setTerm }) => term => {
+      showRanking(term);
+      setTerm(term);
+    }
+  }),
+  lifecycle({
+    componentWillMount() {
+      const { showRanking } = this.props;
+      showRanking("monthly");
+    }
+  })
+);
+
+const enhancedRanking = enhancer(Ranking);
 
 function mapStateToProps(state) {
   return {
