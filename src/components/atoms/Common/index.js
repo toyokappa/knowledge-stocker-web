@@ -4,6 +4,7 @@ import EmailField from "./EmailField";
 import HelpIcon from "./HelpIcon";
 import HelpTooltip from "./HelpTooltip";
 import ListItem from "./ListItem";
+import Loading from "./Loading";
 import Logo from "./Logo";
 import NavItem from "./NavItem";
 import NavLink from "./NavLink";
@@ -23,6 +24,7 @@ export {
   HelpIcon,
   HelpTooltip,
   ListItem,
+  Loading,
   Logo,
   NavItem,
   NavLink,
