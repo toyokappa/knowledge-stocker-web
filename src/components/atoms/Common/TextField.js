@@ -7,6 +7,7 @@ const TextField = styled.input.attrs({
   font-size: 1.2rem;
   padding: 0.375rem 0.75rem;
   border: 3px solid black;
+  border-color: ${props => (props.message ? "red" : "black")};
   box-sizing: border-box;
 `;
 

@@ -16,8 +16,8 @@ export function requestSignUp() {
 export function successSignUp(userName) {
   return { type: types.SUCCESS_SIGN_UP, userName };
 }
-export function failureSignUp(error) {
-  return { type: types.FAILURE_SIGN_UP, error };
+export function failureSignUp(error, errorMessages) {
+  return { type: types.FAILURE_SIGN_UP, error, errorMessages };
 }
 
 export function successSignOut() {

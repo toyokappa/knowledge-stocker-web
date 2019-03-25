@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";
-import { EmailField, PasswordField, Submit, TextField, Title } from "../atoms/Common";
+import { EmailField, PasswordField, Submit, TextField, Title, ErrorMessage } from "../atoms/Common";
 import { signUp } from "../../actions";
 
 class SignUp extends Component {
@@ -26,8 +26,6 @@ class SignUp extends Component {
     event.preventDefault();
     const { signUp } = this.props;
     const { name, email, password, passwordConfirmation } = this.state;
-    if (name === "" || email === "" || password === "" || passwordConfirmation === "") return;
-
     signUp(name, email, password, passwordConfirmation);
     this.setState({ password: "", passwordConfirmation: "" });
   }
@@ -40,6 +38,7 @@ class SignUp extends Component {
 
   render() {
     const { auth } = this.props;
+    const { errorMessages } = auth;
     const { name, email, password, passwordConfirmation } = this.state;
     return (
       <BaseLayout isFetching={auth.isFetching}>
@@ -47,25 +46,38 @@ class SignUp extends Component {
           <SignUpForm onSubmit={this.handleSubmit}>
             <SignUpIcon />
             <SignUpTitle>新規登録</SignUpTitle>
-            <SignUpTextField name="name" value={name} placeholder="ユーザー名" onChange={this.handleChangeInput} />
+            <SignUpTextField
+              name="name"
+              value={name}
+              placeholder="ユーザー名"
+              onChange={this.handleChangeInput}
+              message={errorMessages.name}
+            />
+            <ErrorMessage message={errorMessages.name} attribute="ユーザー名" />
             <SignUpEmailField
               name="email"
               value={email}
               placeholder="メールアドレス"
               onChange={this.handleChangeInput}
+              message={errorMessages.email}
             />
+            <ErrorMessage message={errorMessages.email} attribute="メールアドレス" />
             <SignUpPasswordField
               name="password"
               value={password}
               placeholder="パスワード"
               onChange={this.handleChangeInput}
+              message={errorMessages.password}
             />
+            <ErrorMessage message={errorMessages.password} attribute="パスワード" />
             <SignUpPasswordField
               name="passwordConfirmation"
               value={passwordConfirmation}
               placeholder="パスワード(確認)"
               onChange={this.handleChangeInput}
+              message={errorMessages.passwordConfirmation}
             />
+            <ErrorMessage message={errorMessages.passwordConfirmation} attribute="パスワード(確認)" />
             <SignUpSubmit value="登録" />
           </SignUpForm>
         </SignUpContainer>

@@ -1,6 +1,7 @@
 import Copylight from "./Copylight";
 import EditButton from "./EditButton";
 import EmailField from "./EmailField";
+import ErrorMessage from "./ErrorMessage";
 import HelpIcon from "./HelpIcon";
 import HelpTooltip from "./HelpTooltip";
 import ListItem from "./ListItem";
@@ -21,6 +22,7 @@ export {
   Copylight,
   EditButton,
   EmailField,
+  ErrorMessage,
   HelpIcon,
   HelpTooltip,
   ListItem,
