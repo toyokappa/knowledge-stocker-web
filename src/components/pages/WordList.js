@@ -5,10 +5,12 @@ import BaseLayout from "../templates/BaseLayout";
 import Filters from "../organisms/WordList/Filters";
 import Form from "../organisms/WordList/Form";
 import Words from "../organisms/WordList/Words";
+import { connect } from "react-redux";
 
-export default function WordList() {
+function WordList(props) {
+  const { user } = props;
   return (
-    <BaseLayout>
+    <BaseLayout isFetching={user.isFetching}>
       <Container>
         <FormContainer>
           <Form />
@@ -37,3 +39,14 @@ const ListContainer = styled.div`
   width: 450px;
   box-sizing: border-box;
 `;
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(WordList);

@@ -24,7 +24,7 @@ function Ranking(props) {
     );
   });
   return (
-    <BaseLayout>
+    <BaseLayout isFetching={ranking.isFetching}>
       <RankingTitle>ワカッタ!!ランキング</RankingTitle>
       <TabMenu>
         <TabItem isActive={term === "monthly"} onClick={() => fetchRanking("monthly")}>

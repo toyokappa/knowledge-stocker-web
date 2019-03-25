@@ -12,7 +12,7 @@ function Word(props) {
   const { word } = props;
 
   return (
-    <BaseLayout>
+    <BaseLayout isFetching={word.isFetching}>
       <WordText word={word} />
       <Form wordId={word.id} />
       <KnowledgeList knowledges={word.knowledges} />

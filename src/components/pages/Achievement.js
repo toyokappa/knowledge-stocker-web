@@ -19,7 +19,7 @@ function Achievement(props) {
   const { wordLength, understoodLength, understoodRate, knowledgeLength, aveUnderstanding } = achievement;
 
   return (
-    <BaseLayout>
+    <BaseLayout isFetching={achievement.isFetching}>
       <Container>
         <div>
           <UnderstandingGraph wordLength={wordLength} understoodRate={understoodRate} />

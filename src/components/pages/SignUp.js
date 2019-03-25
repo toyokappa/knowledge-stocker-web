@@ -39,9 +39,10 @@ class SignUp extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     const { name, email, password, passwordConfirmation } = this.state;
     return (
-      <BaseLayout>
+      <BaseLayout isFetching={auth.isFetching}>
         <SignUpContainer>
           <SignUpForm onSubmit={this.handleSubmit}>
             <SignUpIcon />
@@ -124,6 +125,12 @@ const SignUpSubmit = styled(Submit)`
   width: 100%;
 `;
 
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     signUp: (name, email, password, passwordConfirmation) =>
@@ -132,6 +139,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);
