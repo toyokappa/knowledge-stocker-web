@@ -16,6 +16,7 @@ import Submit from "./Submit";
 import TabItem from "./TabItem";
 import TextField from "./TextField";
 import Title from "./Title";
+import Toast from "./Toast";
 import UrlField from "./UrlField";
 
 export {
@@ -37,5 +38,6 @@ export {
   TabItem,
   TextField,
   Title,
+  Toast,
   UrlField
 };

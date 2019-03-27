@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Header from "../../organisms/Header";
 import Footer from "../../organisms/Footer";
-import { Loading } from "../../atoms/Common";
+import { Loading, Toast } from "../../atoms/Common";
 
 export default function BaseLayout(props) {
   const { children, isFetching } = props;
@@ -21,6 +21,7 @@ export default function BaseLayout(props) {
       <Header />
       <Wrapper>{children}</Wrapper>
       <Footer />
+      <Toast />
     </BaseContainer>
   );
 }

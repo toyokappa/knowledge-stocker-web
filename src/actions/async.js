@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import * as sync from "./sync";
 import * as authApi from "../apis/authApi";
 import * as mainApi from "../apis/mainApi";
@@ -19,6 +21,7 @@ export function signUp(name, email, password, passwordConfirmation) {
     const res = await authApi.signUp(name, email, password, passwordConfirmation);
     if (res.status !== 200) {
       const errorMessages = await res.json();
+      toast.error("登録できませんでした");
       return dispatch(sync.failureSignUp(res.statusText, errorMessages));
     }
 
@@ -32,7 +35,10 @@ export function signIn(email, password) {
   return async dispatch => {
     dispatch(sync.requestSignIn());
     const res = await authApi.signIn(email, password);
-    if (res.status !== 200) return dispatch(sync.failureSignIn(res.statusText));
+    if (res.status !== 200) {
+      toast.error("ログインできませんでした");
+      return dispatch(sync.failureSignIn(res.statusText));
+    }
 
     const { authToken, userName } = await res.json();
     localStorage.setItem("authToken", authToken);

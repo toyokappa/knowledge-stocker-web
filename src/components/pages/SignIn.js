@@ -27,7 +27,7 @@ class SignIn extends Component {
     if (email === "" || password === "") return;
 
     signIn(email, password);
-    this.setState({ email: "", password: "" });
+    this.setState({ password: "" });
   }
 
   handleChangeInput(event) {
