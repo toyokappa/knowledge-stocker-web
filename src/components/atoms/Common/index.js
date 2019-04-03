@@ -1,3 +1,4 @@
+import Button from "./Button";
 import Copylight from "./Copylight";
 import EditButton from "./EditButton";
 import EmailField from "./EmailField";
@@ -20,6 +21,7 @@ import Toast from "./Toast";
 import UrlField from "./UrlField";
 
 export {
+  Button,
   Copylight,
   EditButton,
   EmailField,

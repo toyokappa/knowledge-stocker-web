@@ -1,68 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
 import BaseLayout from "../templates/BaseLayout";
-import { EmailField, PasswordField, Submit, Title } from "../atoms/Common";
+import { Button, Title } from "../atoms/Common";
 import { signIn } from "../../actions";
 
-class SignIn extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeInput = this.handleChangeInput.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { signIn } = this.props;
-    const { email, password } = this.state;
-    if (email === "" || password === "") return;
-
-    signIn(email, password);
-    this.setState({ password: "" });
-  }
-
-  handleChangeInput(event) {
-    const { target } = event;
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  render() {
-    const { auth } = this.props;
-    const { email, password } = this.state;
-    return (
-      <BaseLayout isFetching={auth.isFetching}>
-        <SignInContainer>
-          <SignInForm onSubmit={this.handleSubmit}>
-            <SignInIcon />
-            <SignInTitle>ログイン</SignInTitle>
-            <SignInEmailField
-              name="email"
-              value={email}
-              placeholder="メールアドレス"
-              onChange={this.handleChangeInput}
-            />
-            <SignInPasswordField
-              name="password"
-              value={password}
-              placeholder="パスワード"
-              onChange={this.handleChangeInput}
-            />
-            <SignInSubmit value="ログイン" />
-          </SignInForm>
-        </SignInContainer>
-      </BaseLayout>
-    );
-  }
+function SignIn(props) {
+  const { auth, signIn } = props;
+  return (
+    <BaseLayout isFetching={auth.isFetching}>
+      <SignInContainer>
+        <SignInForm>
+          <SignInIcon />
+          <SignInTitle>ログイン</SignInTitle>
+          <SignInButton onClick={() => signIn()}>ログイン</SignInButton>
+        </SignInForm>
+      </SignInContainer>
+    </BaseLayout>
+  );
 }
 
 const SignInContainer = styled.div`
@@ -71,7 +28,7 @@ const SignInContainer = styled.div`
   height: 100%;
 `;
 
-const SignInForm = styled.form`
+const SignInForm = styled.div`
   width: 450px;
   max-width: 100%;
   padding: 2rem;
@@ -93,19 +50,7 @@ const SignInTitle = styled(Title)`
   margin-bottom: 2rem;
 `;
 
-const SignInEmailField = styled(EmailField)`
-  display: block;
-  width: 100%;
-  margin-bottom: 1.5rem;
-`;
-
-const SignInPasswordField = styled(PasswordField)`
-  display: block;
-  width: 100%;
-  margin-bottom: 1.5rem;
-`;
-
-const SignInSubmit = styled(Submit)`
+const SignInButton = styled(Button)`
   display: block;
   width: 100%;
 `;
@@ -118,7 +63,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    signIn: (email, password) => dispatch(signIn(email, password))
+    signIn: () => dispatch(signIn())
   };
 }
 

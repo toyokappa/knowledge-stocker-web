@@ -2,7 +2,7 @@ const baseURL = "http://localhost:3000/api/v1";
 const contentJson = { "Content-Type": "application/json" };
 
 export function authenticate(authToken) {
-  const path = `${baseURL}/sign_in`;
+  const path = `${baseURL}/authenticate`;
   return fetch(path, { headers: { Authorization: `Bearer ${authToken}` } });
 }
 
@@ -16,9 +16,9 @@ export function signUp(name, email, password, passwordConfirmation) {
   });
 }
 
-export function signIn(email, password) {
+export function signIn(uid, name, email, imageUrl) {
   const path = `${baseURL}/sign_in`;
-  const params = { email, password };
+  const params = { uid, name, email, imageUrl };
   return fetch(path, {
     method: "POST",
     headers: contentJson,

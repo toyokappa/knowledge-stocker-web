@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { OAuth } from "oauthio-web";
 
 import * as sync from "./sync";
 import * as authApi from "../apis/authApi";
@@ -31,13 +32,17 @@ export function signUp(name, email, password, passwordConfirmation) {
   };
 }
 
-export function signIn(email, password) {
+export function signIn() {
   return async dispatch => {
     dispatch(sync.requestSignIn());
-    const res = await authApi.signIn(email, password);
+    OAuth.initialize("v2cHpakO0p4q9RaIXYPPqJ0LbKw");
+    const auth = await OAuth.popup("twitter");
+    const { id, alias, email, avatar } = await auth.me();
+    const res = await authApi.signIn(id, alias, email, avatar);
     if (res.status !== 200) {
+      const errorMessages = await res.json();
       toast.error("ログインできませんでした");
-      return dispatch(sync.failureSignIn(res.statusText));
+      return dispatch(sync.failureSignIn(res.statusText, errorMessages));
     }
 
     const { authToken, userName } = await res.json();
