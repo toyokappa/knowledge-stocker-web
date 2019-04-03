@@ -8,9 +8,9 @@ import Words from "../organisms/WordList/Words";
 import { connect } from "react-redux";
 
 function WordList(props) {
-  const { user } = props;
+  const { currentUser } = props;
   return (
-    <BaseLayout isFetching={user.isFetching}>
+    <BaseLayout isFetching={currentUser.isFetching}>
       <Container>
         <FormContainer>
           <Form />
@@ -42,7 +42,7 @@ const ListContainer = styled.div`
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    currentUser: state.currentUser
   };
 }
 

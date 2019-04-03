@@ -7,7 +7,7 @@ const initialState = {
   error: null
 };
 
-export default function user(state = initialState, action) {
+export default function currentUser(state = initialState, action) {
   const { type, userName, words, error } = action;
   switch (type) {
     case types.SUCCESS_SIGN_IN:

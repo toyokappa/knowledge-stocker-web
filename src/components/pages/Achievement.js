@@ -53,14 +53,14 @@ const ScoreContainer = styled.div`
 
 const enhancedAchievement = lifecycle({
   componentWillMount() {
-    const { user, showAchievement } = this.props;
-    showAchievement(user.name);
+    const { currentUser, showAchievement } = this.props;
+    showAchievement(currentUser.name);
   }
 })(Achievement);
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    currentUser: state.currentUser,
     achievement: state.achievement
   };
 }

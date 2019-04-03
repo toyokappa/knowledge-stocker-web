@@ -7,11 +7,11 @@ import { ListItem, RemoveButton } from "../../atoms/Common";
 import { destroyWord } from "../../../actions";
 
 function Word(props) {
-  const { user, word, destroyWord } = props;
+  const { currentUser, word, destroyWord } = props;
   return (
     <WordListItem key={word.id}>
       <WordLink to={`/words/${word.id}`}>{word.text}</WordLink>
-      <RemoveButton onClick={() => destroyWord(user.name, word.id)} />
+      <RemoveButton onClick={() => destroyWord(currentUser.name, word.id)} />
     </WordListItem>
   );
 }
@@ -32,7 +32,7 @@ const WordLink = styled(Link)`
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    currentUser: state.currentUser
   };
 }
 

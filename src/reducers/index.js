@@ -5,8 +5,8 @@ import achievement from "./achievement";
 import auth from "./auth";
 import filter from "./filter";
 import ranking from "./ranking";
-import user from "./user";
+import currentUser from "./currentUser";
 import word from "./word";
 
 export default history =>
-  combineReducers({ router: connectRouter(history), achievement, auth, filter, ranking, user, word });
+  combineReducers({ router: connectRouter(history), achievement, auth, filter, ranking, currentUser, word });

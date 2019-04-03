@@ -8,8 +8,8 @@ import Word from "./Word";
 import { indexWords } from "../../../actions";
 
 function Words(props) {
-  const { user, filter } = props;
-  const filteredWords = filterWords(user.words, filter);
+  const { currentUser, filter } = props;
+  const filteredWords = filterWords(currentUser.words, filter);
   const wordList = filteredWords.map(word => {
     return <Word word={word} key={word.id} />;
   });
@@ -30,8 +30,8 @@ const WordList = styled.ul`
 
 const enhancedWords = lifecycle({
   componentWillMount() {
-    const { user, indexWords } = this.props;
-    indexWords(user.name);
+    const { currentUser, indexWords } = this.props;
+    indexWords(currentUser.name);
   }
 })(Words);
 
@@ -50,7 +50,7 @@ function filterWords(words, filter) {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    currentUser: state.currentUser,
     filter: state.filter
   };
 }

@@ -18,11 +18,11 @@ class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { user, createWord } = this.props;
+    const { currentUser, createWord } = this.props;
     const { wordText } = this.state;
     if (wordText === "") return;
 
-    createWord(user.name, wordText);
+    createWord(currentUser.name, wordText);
     this.setState({ wordText: "" });
   }
 
@@ -61,7 +61,7 @@ const WordTextField = styled(TextField)`
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    currentUser: state.currentUser
   };
 }
 
