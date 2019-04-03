@@ -6,7 +6,7 @@ import { NavItem, NavLink } from "../../atoms/Common";
 import { signOut } from "../../../actions";
 
 function AuthNav(props) {
-  const { signOut } = props;
+  const { currentUser, signOut } = props;
 
   return (
     <Nav>
@@ -21,6 +21,9 @@ function AuthNav(props) {
       </NavItem>
       <NavItem>
         <SignOut onClick={() => signOut()}>ログアウト</SignOut>
+      </NavItem>
+      <NavItem>
+        <UserImage src={currentUser.imageUrl} />
       </NavItem>
     </Nav>
   );
@@ -38,6 +41,21 @@ const SignOut = styled.div`
   cursor: pointer;
 `;
 
+const UserImage = styled.img`
+  height: 25px;
+  width: auto;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-left: 0.25rem;
+`;
+
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     signOut: () => dispatch(signOut())
@@ -45,6 +63,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AuthNav);

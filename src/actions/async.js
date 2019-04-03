@@ -11,8 +11,8 @@ export function authenticate(authToken) {
     const res = await authApi.authenticate(authToken);
     if (res.status !== 200) return dispatch(sync.failureSignIn(res.statusText));
 
-    const { userName } = await res.json();
-    dispatch(sync.successSignIn(userName));
+    const { userName, imageUrl } = await res.json();
+    dispatch(sync.successSignIn(userName, imageUrl));
   };
 }
 
@@ -29,9 +29,9 @@ export function signIn() {
       return dispatch(sync.failureSignIn(res.statusText, errorMessages));
     }
 
-    const { authToken, userName } = await res.json();
+    const { authToken, userName, imageUrl } = await res.json();
     localStorage.setItem("authToken", authToken);
-    dispatch(sync.successSignIn(userName));
+    dispatch(sync.successSignIn(userName, imageUrl));
   };
 }
 

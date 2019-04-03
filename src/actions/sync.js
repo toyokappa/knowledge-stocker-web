@@ -3,21 +3,11 @@ import * as types from "../constants/ActionTypes";
 export function requestSignIn() {
   return { type: types.REQUEST_SIGN_IN };
 }
-export function successSignIn(userName) {
-  return { type: types.SUCCESS_SIGN_IN, userName };
+export function successSignIn(userName, imageUrl) {
+  return { type: types.SUCCESS_SIGN_IN, userName, imageUrl };
 }
 export function failureSignIn(error) {
   return { type: types.FAILURE_SIGN_IN, error };
-}
-
-export function requestSignUp() {
-  return { type: types.REQUEST_SIGN_UP };
-}
-export function successSignUp(userName) {
-  return { type: types.SUCCESS_SIGN_UP, userName };
-}
-export function failureSignUp(error, errorMessages) {
-  return { type: types.FAILURE_SIGN_UP, error, errorMessages };
 }
 
 export function successSignOut() {
