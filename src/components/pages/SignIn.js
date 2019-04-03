@@ -15,7 +15,7 @@ function SignIn(props) {
         <SignInForm>
           <SignInIcon />
           <SignInTitle>ログイン</SignInTitle>
-          <SignInButton onClick={() => signIn()}>ログイン</SignInButton>
+          <SignInButton onClick={() => signIn()}>Twitterアカウントでログインする</SignInButton>
         </SignInForm>
       </SignInContainer>
     </BaseLayout>
@@ -38,7 +38,7 @@ const SignInForm = styled.div`
 `;
 
 const SignInIcon = styled(FontAwesomeIcon).attrs({
-  icon: ["fas", "lock"]
+  icon: ["fab", "twitter"]
 })`
   display: block;
   font-size: 2.5rem;

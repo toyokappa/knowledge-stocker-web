@@ -3,9 +3,9 @@ import {
   faPencilAlt,
   faTrashAlt,
   faQuestionCircle,
-  faLock,
   faUser,
   faCrown,
   faShieldAlt
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faCrown, faLock, faPencilAlt, faShieldAlt, faTrashAlt, faUser, faQuestionCircle);
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+library.add(faCrown, faPencilAlt, faShieldAlt, faTrashAlt, faTwitter, faUser, faQuestionCircle);
