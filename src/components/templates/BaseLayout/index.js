@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TypeKit from "react-typekit";
 
 import Header from "../../organisms/Header";
 import Footer from "../../organisms/Footer";
@@ -17,6 +18,7 @@ export default function BaseLayout(props) {
 
   return (
     <BaseContainer>
+      <TypeKit kitid="ddv1qwo" />
       {isFetching ? fetching : null}
       <Header />
       <Wrapper>{children}</Wrapper>

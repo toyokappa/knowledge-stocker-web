@@ -1,5 +1,5 @@
 {
-  "name": "knowledge-stocker-v2",
+  "name": "knowledge-stocker-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-scripts": "2.1.3",
     "react-toastify": "^5.0.0-rc.3",
     "react-tooltip": "^3.9.2",
+    "react-typekit": "^1.1.4",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

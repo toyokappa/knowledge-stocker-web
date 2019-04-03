@@ -30,7 +30,7 @@ function Ranking(props) {
   return (
     <BaseLayout isFetching={ranking.isFetching}>
       <RankingTitle>
-        ワカッタ!!ランキング
+        ワカッタ！ランキング
         <Help help="所定の期間で理解した単語数のランキング" />
       </RankingTitle>
       <TabMenu>
