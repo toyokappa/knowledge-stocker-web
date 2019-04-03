@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import BaseLayout from "../templates/BaseLayout";
 import { showRanking } from "../../actions";
 import { ListItem, Title, TabItem } from "../atoms/Common";
+import Help from "../molecules/Help";
 
 function Ranking(props) {
   const { ranking, term, fetchRanking } = props;
@@ -18,14 +19,20 @@ function Ranking(props) {
           {rank < 4 ? <CrownIcon rank={rank} /> : <ShieldIcon />}
           <Rank>{rank}</Rank>
         </RankingCrown>
-        <RankingUserName>{user.name}</RankingUserName>
+        <RankingUserName>
+          <RankingUserImage src={user.image_url} />
+          {user.name}
+        </RankingUserName>
         <RankingScore>{user.score}pt</RankingScore>
       </RankingItem>
     );
   });
   return (
     <BaseLayout isFetching={ranking.isFetching}>
-      <RankingTitle>ワカッタ!!ランキング</RankingTitle>
+      <RankingTitle>
+        ワカッタ!!ランキング
+        <Help help="所定の期間で理解した単語数のランキング" />
+      </RankingTitle>
       <TabMenu>
         <TabItem isActive={term === "monthly"} onClick={() => fetchRanking("monthly")}>
           マンスリー
@@ -52,7 +59,7 @@ function Ranking(props) {
 }
 
 function currentUserRanking(currentUser) {
-  const { rank, name, score } = currentUser;
+  const { rank, name, imageUrl, score } = currentUser;
   switch (true) {
     case rank === 6:
       return (
@@ -61,7 +68,10 @@ function currentUserRanking(currentUser) {
             <ShieldIcon />
             <Rank>{rank}</Rank>
           </RankingCrown>
-          <RankingUserName>{name}</RankingUserName>
+          <RankingUserName>
+            <RankingUserImage src={imageUrl} />
+            {name}
+          </RankingUserName>
           <RankingScore>{score}pt</RankingScore>
         </RankingItem>
       );
@@ -76,7 +86,10 @@ function currentUserRanking(currentUser) {
               <ShieldIcon />
               <Rank>{rank}</Rank>
             </RankingCrown>
-            <RankingUserName>{name}</RankingUserName>
+            <RankingUserName>
+              <RankingUserImage src={imageUrl} />
+              {name}
+            </RankingUserName>
             <RankingScore>{score}pt</RankingScore>
           </RankingItem>
         </>
@@ -118,7 +131,7 @@ const RankingItem = styled(ListItem)`
 const RankingCrown = styled.div.attrs({
   className: "fa-stack"
 })`
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 `;
 
 const CrownIcon = styled(FontAwesomeIcon).attrs({
@@ -159,6 +172,15 @@ const Rank = styled.span.attrs({
 const RankingUserName = styled.div`
   font-weight: bold;
   margin-right: auto;
+`;
+
+const RankingUserImage = styled.img`
+  height: 30px;
+  width: auto;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 3px solid black;
+  margin-right: 0.5rem;
 `;
 
 const RankingScore = styled.div`
