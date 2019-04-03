@@ -10,9 +10,6 @@ export default function UnauthNav() {
         <NavLink to="/">ホーム</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="/sign_up">新規登録</NavLink>
-      </NavItem>
-      <NavItem>
         <NavLink to="/sign_in">ログイン</NavLink>
       </NavItem>
     </Nav>

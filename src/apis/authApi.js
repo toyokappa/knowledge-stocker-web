@@ -6,16 +6,6 @@ export function authenticate(authToken) {
   return fetch(path, { headers: { Authorization: `Bearer ${authToken}` } });
 }
 
-export function signUp(name, email, password, passwordConfirmation) {
-  const path = `${baseURL}/sign_up`;
-  const params = { name, email, password, password_confirmation: passwordConfirmation };
-  return fetch(path, {
-    method: "POST",
-    headers: contentJson,
-    body: JSON.stringify(params)
-  });
-}
-
 export function signIn(uid, name, email, imageUrl) {
   const path = `${baseURL}/sign_in`;
   const params = { uid, name, email, imageUrl };

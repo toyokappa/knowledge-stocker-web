@@ -16,22 +16,6 @@ export function authenticate(authToken) {
   };
 }
 
-export function signUp(name, email, password, passwordConfirmation) {
-  return async dispatch => {
-    dispatch(sync.requestSignUp());
-    const res = await authApi.signUp(name, email, password, passwordConfirmation);
-    if (res.status !== 200) {
-      const errorMessages = await res.json();
-      toast.error("登録できませんでした");
-      return dispatch(sync.failureSignUp(res.statusText, errorMessages));
-    }
-
-    const { authToken, userName } = await res.json();
-    localStorage.setItem("authToken", authToken);
-    dispatch(sync.successSignUp(userName));
-  };
-}
-
 export function signIn() {
   return async dispatch => {
     dispatch(sync.requestSignIn());
