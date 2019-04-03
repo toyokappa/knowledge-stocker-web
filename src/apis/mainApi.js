@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3000/api/v1";
+const baseURL = `${process.env.REACT_APP_API_HOST}/api/v1`;
 const contentJson = { "Content-Type": "application/json" };
 
 function authorization() {

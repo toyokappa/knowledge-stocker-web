@@ -19,7 +19,7 @@ export function authenticate(authToken) {
 export function signIn() {
   return async dispatch => {
     dispatch(sync.requestSignIn());
-    OAuth.initialize("v2cHpakO0p4q9RaIXYPPqJ0LbKw");
+    OAuth.initialize(process.env.REACT_APP_OAUTHIO_KEY);
     const auth = await OAuth.popup("twitter");
     const { id, alias, email, avatar } = await auth.me();
     const res = await authApi.signIn(id, alias, email, avatar);
