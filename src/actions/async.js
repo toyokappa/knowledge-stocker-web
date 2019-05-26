@@ -20,7 +20,8 @@ export function signIn() {
   return async dispatch => {
     dispatch(sync.requestSignIn());
     const auth = await firebase.auth().signInWithPopup(twitterProvider);
-    const { uid, displayName, email, photoURL } = await auth.user;
+    const { providerData } = await auth.user;
+    const { uid, displayName, email, photoURL } = providerData[0];
     const res = await authApi.signIn(uid, displayName, email, photoURL);
     if (res.status !== 200) {
       const errorMessages = await res.json();
