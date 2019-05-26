@@ -172,6 +172,9 @@ const Rank = styled.span.attrs({
 const RankingUserName = styled.div`
   font-weight: bold;
   margin-right: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const RankingUserImage = styled.img`
