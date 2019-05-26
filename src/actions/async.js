@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
-import { OAuth } from "oauthio-web";
 
+import firebase, { twitterProvider } from "../vendor/firebase";
 import * as sync from "./sync";
 import * as authApi from "../apis/authApi";
 import * as mainApi from "../apis/mainApi";
@@ -19,10 +19,9 @@ export function authenticate(authToken) {
 export function signIn() {
   return async dispatch => {
     dispatch(sync.requestSignIn());
-    OAuth.initialize(process.env.REACT_APP_OAUTHIO_KEY);
-    const auth = await OAuth.popup("twitter");
-    const { id, alias, email, avatar } = await auth.me();
-    const res = await authApi.signIn(id, alias, email, avatar);
+    const auth = await firebase.auth().signInWithPopup(twitterProvider);
+    const { uid, displayName, email, photoURL } = await auth.user;
+    const res = await authApi.signIn(uid, displayName, email, photoURL);
     if (res.status !== 200) {
       const errorMessages = await res.json();
       toast.error("ログインできませんでした");
