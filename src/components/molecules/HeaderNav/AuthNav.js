@@ -11,7 +11,7 @@ function AuthNav(props) {
   return (
     <Nav>
       <NavItem>
-        <NavLink to="/">ホーム</NavLink>
+        <NavLink to="/words">ホーム</NavLink>
       </NavItem>
       <NavItem>
         <NavLink to="/achievement">成績</NavLink>

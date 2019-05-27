@@ -5,6 +5,7 @@ import UnauthRoute from "./lib/UnauthRoute";
 import { ConnectedRouter } from "connected-react-router";
 
 import Auth from "./components/templates/Auth";
+import Home from "./components/pages/Home";
 import WordList from "./components/pages/WordList";
 import Word from "./components/pages/Word";
 import Achievement from "./components/pages/Achievement";
@@ -18,7 +19,8 @@ export default function Router(props) {
     <ConnectedRouter history={history}>
       <Auth>
         <Switch>
-          <PrivateRoute exact path="/" component={WordList} />
+          <UnauthRoute exact path="/" component={Home} />
+          <PrivateRoute exact path="/words" component={WordList} />
           <PrivateRoute exact path="/words/:wordId" component={Word} />
           <PrivateRoute exact path="/achievement" component={Achievement} />
           <PrivateRoute exact path="/ranking" component={Ranking} />

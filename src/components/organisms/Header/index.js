@@ -11,7 +11,7 @@ function Header(props) {
 
   return (
     <HeaderContainer>
-      <LogoLink to="/">
+      <LogoLink to={auth.isSignedIn ? "/words" : "/"}>
         <Logo />
       </LogoLink>
       {auth.isSignedIn ? <AuthNav /> : <UnauthNav />}

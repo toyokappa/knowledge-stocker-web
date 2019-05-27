@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 function UnauthRoute({ component: Component, auth, ...rest }) {
-  return <Route {...rest} render={props => (auth.isSignedIn ? <Redirect to="/" /> : <Component {...props} />)} />;
+  return <Route {...rest} render={props => (auth.isSignedIn ? <Redirect to="/words" /> : <Component {...props} />)} />;
 }
 
 function mapStateToProps(state) {
